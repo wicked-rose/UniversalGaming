@@ -110,17 +110,18 @@ Rectangle {
         Text {
             id: text1
             height: 106
-            text: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\nhr { height: 1px; border-width: 0; }\n</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt;\">Custom Controller Layout</span></p></body></html>"
+            text: "Custom Controller Layout"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            font.family: "Courier"
             anchors.leftMargin: 10
             anchors.topMargin: 10
             font.capitalization: Font.AllUppercase
             textFormat: Text.RichText
-            font.pointSize: 12
+            font.pointSize: 42
             anchors.rightMargin: 10
             font.weight: Font.DemiBold
         }
@@ -135,3 +136,9 @@ Rectangle {
         }
     ]
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.5}D{i:6}
+}
+##^##*/
