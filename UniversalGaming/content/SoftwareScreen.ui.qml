@@ -99,7 +99,7 @@ Rectangle {
         Text {
             id: text1
             height: 100
-            text: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\nhr { height: 1px; border-width: 0; }\n</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt;\">Choose one of the provided preset controller layouts, or navigate to CUSTOM to create your own button mapping configuration</span></p></body></html>"
+            text: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\nhr { height: 1px; border-width: 0; }\n</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt;\">Choose from the provided on-screen accesibilty options</span></p></body></html>"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
@@ -107,13 +107,14 @@ Rectangle {
             wrapMode: Text.WordWrap
             anchors.rightMargin: 10
             anchors.leftMargin: 10
-            anchors.topMargin: 80
+            anchors.topMargin: 120
             textFormat: Text.RichText
         }
 
         Text {
             id: text2
-            text: qsTr("Preset Controller Layouts")
+            height: 90
+            text: qsTr("On-Screen Accessibility Options")
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
@@ -121,31 +122,33 @@ Rectangle {
             font.pixelSize: 42
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.WordWrap
             font.bold: true
             font.weight: Font.DemiBold
             font.family: "Courier"
             font.capitalization: Font.AllUppercase
             anchors.rightMargin: 10
             anchors.leftMargin: 10
-            anchors.topMargin: 20
+            anchors.topMargin: 24
         }
 
         Button {
             id: layout1
-            width: 150
-            height: 50
-            text: qsTr("Layout #1")
+            width: 250
+            height: 75
+            text: qsTr("High-contrast Mode")
             anchors.left: parent.left
             anchors.top: parent.top
+            font.pointSize: 24
             anchors.topMargin: 200
             anchors.leftMargin: 20
         }
 
         Button {
             id: layout2
-            width: 150
-            height: 50
-            text: qsTr("Layout #2")
+            width: 250
+            height: 75
+            text: qsTr("Audio Text Descriptions.")
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.leftMargin: 20
@@ -154,8 +157,8 @@ Rectangle {
 
         Button {
             id: layout3
-            width: 150
-            height: 50
+            width: 250
+            height: 75
             text: qsTr("Layout #3")
             anchors.left: parent.left
             anchors.top: parent.top
@@ -174,7 +177,7 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.5}D{i:7}D{i:10}D{i:11}
+    D{i:0;formeditorZoom:0.5}
 }
 ##^##*/
 
