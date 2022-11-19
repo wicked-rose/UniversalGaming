@@ -42,6 +42,36 @@ FlowView {
             id: flowTransition5
             to: presetsScreenItem
             from: customScreenItem
+        },
+        FlowTransition {
+            id: flowTransition6
+            to: homeScreenItem
+            from: softwareScreenItem
+        },
+        FlowTransition {
+            id: flowTransition7
+            to: presetsScreenItem
+            from: softwareScreenItem
+        },
+        FlowTransition {
+            id: flowTransition8
+            to: customScreenItem
+            from: softwareScreenItem
+        },
+        FlowTransition {
+            id: flowTransition9
+            to: softwareScreenItem
+            from: homeScreenItem
+        },
+        FlowTransition {
+            id: flowTransition10
+            to: softwareScreenItem
+            from: presetsScreenItem
+        },
+        FlowTransition {
+            id: flowTransition11
+            to: softwareScreenItem
+            from: customScreenItem
         }
     ]
 
@@ -67,6 +97,14 @@ FlowView {
             width: 232
             height: 50
         }
+
+        FlowActionArea {
+            target: flowTransition9
+            x: 8
+            y: 198
+            width: 232
+            height: 52
+        }
     }
 
     PresetsScreenItem {
@@ -86,6 +124,14 @@ FlowView {
             y: 140
             width: 236
             height: 47
+        }
+
+        FlowActionArea {
+            target: flowTransition10
+            x: 8
+            y: 198
+            width: 236
+            height: 51
         }
     }
 
@@ -107,13 +153,50 @@ FlowView {
             width: 234
             height: 52
         }
+
+        FlowActionArea {
+            target: flowTransition11
+            x: 8
+            y: 197
+            width: 234
+            height: 55
+        }
+    }
+
+    SoftwareScreenItem {
+        id: softwareScreenItem
+
+        FlowActionArea {
+            target: flowTransition6
+            x: 8
+            y: 18
+            width: 234
+            height: 54
+        }
+
+        FlowActionArea {
+            target: flowTransition7
+            x: 8
+            y: 78
+            width: 234
+            height: 53
+        }
+
+        FlowActionArea {
+            target: flowTransition8
+            x: 8
+            y: 137
+            width: 234
+            height: 55
+        }
     }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.125;height:10000;width:10000}D{i:10}D{i:8;flowX:364.5295141618784;flowY:266.88455448038576}
-D{i:11;flowX:1523.399553590217;flowY:1114.520758896631}D{i:16}D{i:14;flowX:404.1168856476917;flowY:1993.6780115780768}
+    D{i:0;areaColor:"#ff6e00";blockColor:"#ff00e7";formeditorZoom:0.125;height:10000;transitionColor:"#0001ff";width:10000}
+D{i:14;flowX:390.20446440222213;flowY:268.60223220111106}D{i:18;flowX:1701.8401796200005;flowY:1582.6022322011108}
+D{i:22;flowX:192.8736626366673;flowY:1866.0446440222227}D{i:26;flowX:2560;flowY:625.4794611399989}
 }
 ##^##*/
 
