@@ -22,7 +22,6 @@ public:
 private slots:
     void openSerialPort();
     void closeSerialPort();
-    void about();
     void writeData(const QByteArray &data);
     void readData();
 

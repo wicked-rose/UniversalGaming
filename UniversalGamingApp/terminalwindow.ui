@@ -13,21 +13,7 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Test Labels</string>
-    </property>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -37,9 +23,19 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionConnect"/>
+    <addaction name="actionDisconnect"/>
+    <addaction name="actionClear"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuOptions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionConnect">
+  <action name="actionConnect_1">
    <property name="icon">
     <iconset>
      <normaloff>:/images/connect.png</normaloff>:/images/connect.png</iconset>
@@ -54,7 +50,7 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionDisconnect">
+  <action name="actionDisconnect_1">
    <property name="icon">
     <iconset>
      <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
@@ -69,7 +65,7 @@
     <string>Ctrl+D</string>
    </property>
   </action>
-  <action name="actionConfigure">
+  <action name="actionConfigure_1">
    <property name="icon">
     <iconset>
      <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
@@ -84,7 +80,7 @@
     <string>Alt+C</string>
    </property>
   </action>
-  <action name="actionClear">
+  <action name="actionClear_1">
    <property name="icon">
     <iconset>
      <normaloff>:/images/clear.png</normaloff>:/images/clear.png</iconset>
@@ -99,7 +95,7 @@
     <string>Alt+L</string>
    </property>
   </action>
-  <action name="actionQuit">
+  <action name="actionQuit_1">
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -107,12 +103,36 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actiontestAction">
+  <action name="actionConnect">
    <property name="text">
-    <string>testAction</string>
+    <string>Connect</string>
    </property>
    <property name="toolTip">
-    <string>this is a test</string>
+    <string>Connect to serial port</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+   <property name="toolTip">
+    <string>Disconnect from serial port</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear data</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

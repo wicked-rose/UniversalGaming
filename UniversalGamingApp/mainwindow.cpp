@@ -22,15 +22,6 @@ MainWindow::~MainWindow()
     delete m_ui;
 }
 
-//void MainWindow::openTerminal(){
-//   if(m_ui->menuTabWidget->currentIndex() == 4){
-//       //win->show();
-//       //m_ui->TestTab->layout().
-//       setCentralWidget(m_console);
-
-//   }
-//}
-
 void MainWindow::apply()
 {
     m_settings->updateSettings();
