@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "customtabstyle.h"
 
 #include <QApplication>
 

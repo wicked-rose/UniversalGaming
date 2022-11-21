@@ -1,3 +1,6 @@
+#ifndef CUSTOMTABSTYLE_H
+#define CUSTOMTABSTYLE_H
+
 #include <QProxyStyle>
 #include <QStyleOptionTab>
 
@@ -24,3 +27,5 @@ public:
     QProxyStyle::drawControl(element, option, painter, widget);
   }
 };
+
+#endif

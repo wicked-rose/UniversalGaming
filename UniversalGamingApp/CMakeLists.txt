@@ -19,6 +19,9 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         customtabstyle.h
+        console.h console.cpp
+        settingswidget.h settingswidget.cpp settingswidget.ui
+        terminaldialog.h terminaldialog.cpp terminaldialog.ui
 )
 
 list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.4.1/mingw_64")
