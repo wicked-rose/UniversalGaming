@@ -4,9 +4,12 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QStackedWidget>
+#include <QPushButton>
 #include "customtabstyle.h"
-#include "console.h"
+#include "terminalwindow.h"
 #include "settingswidget.h"
+#include "console.h"
+//#include "settingswidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,25 +22,17 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-/*
+    //void openTerminal();
+
 private slots:
-    void openSerialPort();
-    void closeSerialPort();
-    void about();
-    void writeData(const QByteArray &data);
-    void readData();
-
-    void handleError(QSerialPort::SerialPortError error);
+    void apply();
 
 private:
-    void initActionsConnections();
-*/
-private:
-    void showStatusMessage(const QString &message);
     Ui::MainWindow *m_ui;
+//    terminalWindow *win = nullptr;
+    SettingsWidget *m_settings = nullptr;
     Console *m_console = nullptr;
-    SettingsWidget *settingsWidget = nullptr;
-    QWidget *mySettingsWidget = nullptr;
-    QSerialPort *m_serial = nullptr;
+//    QWidget *mySettingsWidget = nullptr;
+//    QSerialPort *m_serial = nullptr;
 };
 #endif // MAINWINDOW_H

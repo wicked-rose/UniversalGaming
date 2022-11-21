@@ -16,8 +16,8 @@ SettingsWidget::SettingsWidget(QWidget *parent) :
 
     m_ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
 
-    connect(m_ui->applyButton, &QPushButton::clicked,
-            this, &SettingsWidget::apply);
+    //connect(m_ui->applyButton, &QPushButton::clicked,
+            //this, &SettingsWidget::apply);
     connect(m_ui->serialPortInfoListBox, &QComboBox::currentIndexChanged,
             this, &SettingsWidget::showPortInfo);
     connect(m_ui->baudRateBox,  &QComboBox::currentIndexChanged,
@@ -57,11 +57,7 @@ void SettingsWidget::showPortInfo(int idx)
     m_ui->pidLabel->setText(tr("Product Identifier: %1").arg(list.value(6, blankString)));
 }
 
-void SettingsWidget::apply()
-{
-    updateSettings();
-    //hide();
-}
+
 
 void SettingsWidget::checkCustomBaudRatePolicy(int idx)
 {

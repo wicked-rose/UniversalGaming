@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS SerialPort Widgets)
+find_package(Qt6 REQUIRED COMPONENTS SerialPort Widgets Gui Core)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -21,7 +21,7 @@ set(PROJECT_SOURCES
         customtabstyle.h
         console.h console.cpp
         settingswidget.h settingswidget.cpp settingswidget.ui
-        terminaldialog.h terminaldialog.cpp terminaldialog.ui
+        terminalwindow.h terminalwindow.cpp terminalwindow.ui
 )
 
 list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.4.1/mingw_64")
@@ -33,6 +33,8 @@ qt_add_executable(UniversalGamingApp
 
 target_link_libraries(UniversalGamingApp PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     Qt6::SerialPort
+    Qt6::Gui
+    Qt6::Core
 )
 
 set_target_properties(UniversalGamingApp PROPERTIES

@@ -31,22 +31,23 @@ public:
         QString stringStopBits;
         QSerialPort::FlowControl flowControl;
         QString stringFlowControl;
+
         //bool localEchoEnabled;
     };
     explicit SettingsWidget(QWidget *parent = nullptr);
     ~SettingsWidget();
     Settings settings() const;
+    void updateSettings();
 
 private slots:
     void showPortInfo(int idx);
-    void apply();
     void checkCustomBaudRatePolicy(int idx);
     void checkCustomDevicePathPolicy(int idx);
 
 private:
     void fillPortsParameters();
     void fillPortsInfo();
-    void updateSettings();
+
 
 private:
     Ui::SettingsWidget *m_ui = nullptr;
