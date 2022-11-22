@@ -4,13 +4,16 @@
 
 #include <QLabel>
 #include <QMessageBox>
+#include <QDebug>
 
-terminalWindow::terminalWindow(QWidget *parent) :
+terminalWindow::terminalWindow(QWidget *parent, SettingsWidget *m_currSettings) :
     QMainWindow(parent),
     m_ui(new Ui::terminalWindow),
     m_console(new Console),
+    m_status(new QLabel),
     m_serial(new QSerialPort(this))
 {
+    m_settingsWidget = m_currSettings;
     m_ui->setupUi(this);
     m_console->setEnabled(false);
     setCentralWidget(m_console);
@@ -18,6 +21,7 @@ terminalWindow::terminalWindow(QWidget *parent) :
     m_ui->actionConnect->setEnabled(true);
     m_ui->actionDisconnect->setEnabled(false);
     m_ui->actionQuit->setEnabled(true);
+    m_ui->statusBar->addWidget(m_status);
 
     initActionsConnections();
 
@@ -33,7 +37,9 @@ terminalWindow::~terminalWindow()
 
 void terminalWindow::openSerialPort()
 {
+    qDebug() << "here";
     const SettingsWidget::Settings p = m_settingsWidget->settings();
+    qDebug() << "Settings Name: " << p.name;
     m_serial->setPortName(p.name);
     m_serial->setBaudRate(p.baudRate);
     m_serial->setDataBits(p.dataBits);

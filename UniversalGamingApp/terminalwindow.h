@@ -7,6 +7,8 @@
 #include "console.h"
 #include "settingswidget.h"
 
+class QLabel;
+
 namespace Ui {
 class terminalWindow;
 }
@@ -16,7 +18,7 @@ class terminalWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit terminalWindow(QWidget *parent = nullptr);
+    explicit terminalWindow(QWidget *parent = nullptr, SettingsWidget *m_currSettings = nullptr);
     ~terminalWindow();
 
 private slots:
@@ -35,7 +37,6 @@ private:
     Ui::terminalWindow *m_ui;
     Console *m_console = nullptr;
     SettingsWidget *m_settingsWidget = nullptr;
-    //QWidget *mySettingsWidget = nullptr;
     QSerialPort *m_serial = nullptr;
     QLabel *m_status = nullptr;
 };

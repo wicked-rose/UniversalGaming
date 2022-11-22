@@ -164,5 +164,5 @@ void SettingsWidget::updateSettings()
     m_currentSettings.flowControl = flowControlData.value<QSerialPort::FlowControl>();
     m_currentSettings.stringFlowControl = m_ui->flowControlBox->currentText();
 
-    //m_currentSettings.localEchoEnabled = m_ui->localEchoCheckBox->isChecked();
+    m_currentSettings.localEchoEnabled = m_ui->localEchoCheckBox->isChecked();
 }

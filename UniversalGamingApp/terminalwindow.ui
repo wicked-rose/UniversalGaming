@@ -34,7 +34,7 @@
    </widget>
    <addaction name="menuOptions"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect_1">
    <property name="icon">
     <iconset>

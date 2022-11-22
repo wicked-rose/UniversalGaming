@@ -4,6 +4,7 @@
 #include "qlayout.h"
 
 #include <QSerialPort>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -25,7 +26,9 @@ MainWindow::~MainWindow()
 void MainWindow::apply()
 {
     m_settings->updateSettings();
-    terminalWindow *win = new terminalWindow();
+
+    //std::cout << m_settings-> << std::endl;
+    terminalWindow *win = new terminalWindow(this, m_settings);
     if(win != nullptr){
         win->show();
     }
