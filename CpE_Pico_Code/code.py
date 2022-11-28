@@ -38,9 +38,14 @@ layout = KeyboardLayoutUS(keyboard)
 gp = Gamepad(usb_hid.devices)
 
 #Create a collection of GPIO pins that represent the buttons
-#This includes the digital pins for the Directional Pad.
+#This includes the digital pins for the Directional Pad
 #They can be used as regular buttons if using the analog inputs instead
-button_pins = (board.D12,board.D13,board.A1,board.D6,board.D5,board.D24,board.D25,board.D9,board.D10,board.D4)
+#koeyboard(x,x,x,x,x,x,up,x,x,x
+button_pins = (board.A1,board.A0,board.D25,board.D24,
+board.RX,board.D12,board.D13,board.D11,
+board.D4,board.MOSI,board.MISO,board.SCK,
+board.D6,board.D10,board.D9,board.D5
+)
 
 def update_oled(mode):
     splash = displayio.Group()
@@ -59,12 +64,6 @@ def update_oled(mode):
     )
     splash.append(text_area)
 
-def simple_serial_read():
-    if supervisor.runtime.serial_bytes_available:
-        value = input().strip()
-        print("value", value)
-        # Sometimes Windows sends an extra (or missing) newline - ignore them
-        return value
 
 
 def serial_read():
@@ -78,32 +77,15 @@ def serial_read():
             return value
 
 
-"""
-def serial_read():
-    if supervisor.runtime.serial_bytes_available:
-        value = input().strip()
-        print("value", value)
-        # Sometimes Windows sends an extra (or missing) newline - ignore them
-        if type(value) == type(3): #aka is an int
-            if value >= 1 and value <= 5:
-                return value
-        elif type(value) == type("hello"):
-            if int(value) >= 1 and int(value) <= 5:
-                return int(value)
-        else:
-            return -1
-"""
 def range_map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
 
 # Map the buttons to button numbers on the Gamepad
 # gamepad_buttons[i] will send that button number when buttons[i]
 # is pushed.
-"""1:
-"""
 gamepad_buttons = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
 gamepad_buttons_layout_default = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
-gamepad_buttons_layout2 = ( 5, 6, 7, 8, 1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 15, 16)
+gamepad_buttons_layout2 = (10, 9, 6, 5, 1,2,3,4,7,8, 11,12, 13, 14, 15, 16)
 
 #Keyboard Mode Button Definitions
 keyboard_buttons = {0 : Keycode.UP_ARROW, 1 : Keycode.LEFT_ARROW, 2 : Keycode.DOWN_ARROW, 3 : Keycode.RIGHT_ARROW,
@@ -121,7 +103,7 @@ fps_buttons = {0 : Keycode.W, 1 : Keycode.A, 2 : Keycode.S, 3 : Keycode.D,
 mode_names = {1 : 'Gamepad', 2 : 'Keyboard', 3 : 'FPS', 4 : "Mouse", 5 : "Multimedia"}
 
 #Set Default Mode To 1
-mode = 2
+mode = 1
 #Define OLED Parameters
 WIDTH = 128
 HEIGHT = 64
@@ -129,9 +111,13 @@ BORDER = 5
 
 buttons = [digitalio.DigitalInOut(pin) for pin in button_pins]
 
-modeChangeButton = digitalio.DigitalInOut(board.A0)
-modeChangeButton.direction = digitalio.Direction.INPUT
-modeChangeButton.pull = digitalio.Pull.UP
+#modeChangeButton = digitalio.DigitalInOut(board.RX)
+#modeChangeButton.direction = digitalio.Direction.INPUT
+#modeChangeButton.pull = digitalio.Pull.UP
+
+layoutChangeButton = digitalio.DigitalInOut(board.TX)
+layoutChangeButton.direction = digitalio.Direction.INPUT
+layoutChangeButton.pull = digitalio.Pull.UP
 
 #Initialize The Buttons
 for button in buttons:
@@ -175,98 +161,144 @@ splash.append(text_area)
 
 def debounce():
     sleep(0.2)
+
+#defaults
 mode = 1
 update_oled(mode)
 count = 0
-tempMode = 1
-tempMode2 = 0
+serialRead = 1
 oldmode = 6
+oldLayoutButtonValue = True
+layout_num = 1
+joystickmode = "analog"
 while True:
-
-    #if supervisor.runtime.serial_bytes_available: #only read serial when bytes are available
     oldmode = mode
+    #read uart if bytes are available
     
-        
-    if supervisor.runtime.serial_bytes_available:
-        tempMode = serial_read()
-        if type(tempMode) == type(2):
-            mode = tempMode
-            if mode != oldmode:
-                print ("old mode is type ",type(oldmode) , "for oldmode:",oldmode)
-                print ("serial read gives type",type(tempMode) , "for typing this:",tempMode)
     
+    
+   
     #Check to see if the mode change button is pressed.
-    if  modeChangeButton.value == False:
-        print("mode should be incremented")
-        mode = mode + 1
-        sleep(0.1)
-        if mode > 5:
-            mode = 1
-            
+#    if  modeChangeButton.value == False:
+#        print("mode should be incremented")
+#        mode = mode + 1
+#        sleep(0.2)
+#        if mode > 5:
+#            mode = 1
+    #check to see if layout switch putton is pressed.
+    if layoutChangeButton.value == False and layoutChangeButton != oldLayoutButtonValue:
+        oldLayoutButtonValue = False
+        if joystickmode == "analog":
+            joystickmode = "digital"
+        else:
+            joystickmode = "analog"
+        layout_num = layout_num +1
+        if layout_num > 2:
+            layout_num = 1
+        debounce()
+
+        if layout_num == 1:
+            gamepad_buttons = gamepad_buttons_layout_default 
+        elif layout_num == 2:
+            gamepad_buttons = gamepad_buttons 
+        else:
+            gamepad_buttons = gamepad_buttons_layout_default 
+        print("1 gp buttons changed via press... now:", gamepad_buttons)
+        print("joystick mode is now:", joystickmode)
+        oldLayoutButtonValue = True
+    
+    if (count >= 1000):
+        count = 0
+        #print("heartbeat")
+    count = count +1
+    
+    if supervisor.runtime.serial_bytes_available:
+        serialRead = serial_read()
+        if type(serialRead) == type(2):
+            mode = serialRead
+            if mode != oldmode:
+                print ("layourchangebutton value: ",layoutChangeButton.value)
+        elif type(serialRead) == type("hi"): #if serial stuff is not a number:
+            if serialRead == "Print Mode":
+                print(mode_names[mode])
+            if serialRead == "layout2":
+                gamepad_buttons = gamepad_buttons_layout3
+                print("2gamepad buttons changed via uart... now they are:", gamepad_buttons)
+            if serialRead == "layout_default":
+                gamepad_buttons = gamepad_buttons_layout_default
+                print("2 gamepad buttons changed via uart... now they are:", gamepad_buttons)
+    
     if int(mode) >=1 and int(mode) <= 5:
         if mode != oldmode:
             update_oled(mode)
     
-    if (count >= 10):
-        count = 0
+    if mode == 1:
+
         
-        #print ("mode =", mode)
-        #print ("mode ==1: ", mode ==str(1))
-        #print ("mode ==2: ", mode ==str(2))
-        #print ("mode ==3: ", mode ==str(3))
-        #print ("mode ==4: ", mode ==str(4))
-    count = count +1
-    
-    
-    
-    
-    
-    if mode == str(1):
-        # Check value of up, down, left and right buttons
-        # and set the joystick values appropriately.
-        # can be replaced with values from analog stick instead
-        #Not keyboard presses for directional
-        #So check them seperately first
-        #Set Joystick movements
-        layout = serial_read()
-        
-        
-        gp.move_joysticks(
+        if joystickmode == "digital":
+            setx = 0
+            sety = 0
+            #Not keyboard presses for directional
+            #So check them seperately first
+            if not buttons[12].value:
+                sety = -127
+            if not buttons[13].value:
+                sety = 127
+            if not buttons[14].value:
+                setx = -127
+            if not buttons[15].value:
+                setx = 127
+            #Set Joystick movements
             gp.move_joysticks(
-        x=range_map(ax.value, 0, 65535, -127, 127),
-        y=range_map(ay.value, 0, 65535, 127, -127),
-    )
-        )
+                x=setx,
+                y=sety,
+            )
+            
+            # Go through all the button definitions, and
+            # press or release as appropriate
+            for i, button in enumerate(buttons):
+                if i < 12: #Skip the last 4, since they're the directionals
+                    gamepad_button_num = gamepad_buttons[i] # Minus 4 to ignore directionals
+                    if button.value:
+                        gp.release_buttons(gamepad_button_num)
+                    else:
+                        gp.press_buttons(gamepad_button_num)
         
-        # Go through all the button definitions, and
-        # press or release as appropriate
-        for i, button in enumerate(buttons):
-            if i > 3: #Skip the first 4, since they're the directionals
-                gamepad_button_num = gamepad_buttons[i - 4] # Minus 4 to ignore directionals
+        else:
+            gp.move_joysticks(
+                gp.move_joysticks(
+            x=range_map(ax.value, 0, 65535, -127, 127),
+            y=range_map(ay.value, 0, 65535, 127, -127),
+        )
+            )
+            
+            for i, button in enumerate(buttons):
+                gamepad_button_num = gamepad_buttons[i]
                 if button.value:
+                    
                     gp.release_buttons(gamepad_button_num)
                 else:
+                    print("button",i,"=",button.value, "was pressed")
                     gp.press_buttons(gamepad_button_num)
         
-    if mode == str(2): # Keyboard Mode
+    if mode == 2: # Keyboard Mode
             
         for i, button in enumerate(buttons):
-            print("button",i,"=",button.value)
+            #print("button",i,"=",button.value) #optional print to show which game buttons are pushed
             if button.value:
                 keyboard.release(keyboard_buttons[i])
             else:
                 keyboard.press(keyboard_buttons[i]) 
-    
     #FPS Mode
-    if mode == str(3):
+    if mode == 3:
         for i, button in enumerate(buttons):
             gamepad_button_num = gamepad_buttons[i]
             if button.value:
                 keyboard.release(fps_buttons[i])
             else:
                 keyboard.press(fps_buttons[i])
-                
-    if mode == str(4):
+    #Mouse mode            
+    if mode == 4:
         if not buttons[0].value:
             mouse.move(y=-4)
         if not buttons[2].value:
@@ -277,12 +309,12 @@ while True:
             mouse.move(x=4)
         if not buttons[4].value:
             mouse.click(Mouse.LEFT_BUTTON)
-            sleep(0.2)
+            debounce()
         if not buttons[5].value:
             mouse.click(Mouse.RIGHT_BUTTON)
-            sleep(0.2)
+            debounce()
 
-    if mode == str(8): #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
+    if mode == 8: #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
         if not buttons[0].value:
             mediacontrol.send(ConsumerControlCode.VOLUME_INCREMENT)
             debounce()
