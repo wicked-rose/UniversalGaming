@@ -38,7 +38,6 @@ terminalWindow::~terminalWindow()
 void terminalWindow::openSerialPort()
 {
     const SettingsWidget::Settings p = m_settingsWidget->settings();
-    //qDebug() << "Settings Name: " << p.name;
     m_serial->setPortName(p.name);
     m_serial->setBaudRate(p.baudRate);
     m_serial->setDataBits(p.dataBits);
