@@ -37,17 +37,17 @@ keyboard = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(keyboard)
 gp = Gamepad(usb_hid.devices)
 
-#Create a collection of GPIO pins that represent the buttons
+#Create a collection of GPIO pins that represent the buttons.
 #This includes the digital pins for the Directional Pad
 #They can be used as regular buttons if using the analog inputs instead
 #koeyboard(x,x,x,x,x,x,up,x,x,x
 button_pins = (board.A1,board.A0,board.D25,board.D24,
-board.RX,board.D12,board.D13,board.D11,
-board.D4,board.MOSI,board.MISO,board.SCK,
+board.MOSI,board.D12,board.D13,board.D11,
+board.SCK,board.RX,board.D4,
 board.D6,board.D10,board.D9,board.D5
 )
 
-def update_oled(mode):
+def update_oled(mode,joystickmode):
     splash = displayio.Group()
     display.show(splash)
 
@@ -61,6 +61,12 @@ def update_oled(mode):
     text = mode_names[int(mode)]
     text_area = label.Label(
         terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=23
+    )
+    
+    splash.append(text_area)
+    text = joystickmode
+    text_area = label.Label(
+        terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=43
     )
     splash.append(text_area)
 
@@ -83,9 +89,9 @@ def range_map(x, in_min, in_max, out_min, out_max):
 # Map the buttons to button numbers on the Gamepad
 # gamepad_buttons[i] will send that button number when buttons[i]
 # is pushed.
-gamepad_buttons = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
-gamepad_buttons_layout_default = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
-gamepad_buttons_layout2 = (10, 9, 6, 5, 1,2,3,4,7,8, 11,12, 13, 14, 15, 16)
+gamepad_buttons1 =                   (1, 2, 3, 4, 5, 6, 7, 8, 10, 9, 11, 12, 13, 14, 15)
+gamepad_buttons_layout_default =    (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+gamepad_buttons_layout2 =           (10, 9, 6, 5, 1, 2, 3, 4, 7, 8, 11, 12, 13, 14, 15)
 
 #Keyboard Mode Button Definitions
 keyboard_buttons = {0 : Keycode.UP_ARROW, 1 : Keycode.LEFT_ARROW, 2 : Keycode.DOWN_ARROW, 3 : Keycode.RIGHT_ARROW,
@@ -118,6 +124,10 @@ buttons = [digitalio.DigitalInOut(pin) for pin in button_pins]
 layoutChangeButton = digitalio.DigitalInOut(board.TX)
 layoutChangeButton.direction = digitalio.Direction.INPUT
 layoutChangeButton.pull = digitalio.Pull.UP
+
+JoystickChangeButton = digitalio.DigitalInOut(board.MISO)
+JoystickChangeButton.direction = digitalio.Direction.INPUT
+JoystickChangeButton.pull = digitalio.Pull.UP
 
 #Initialize The Buttons
 for button in buttons:
@@ -164,13 +174,16 @@ def debounce():
 
 #defaults
 mode = 1
-update_oled(mode)
 count = 0
 serialRead = 1
 oldmode = 6
 oldLayoutButtonValue = True
 layout_num = 1
 joystickmode = "analog"
+oldJoystickMode = "analog"
+gamepad_buttons = gamepad_buttons1
+
+update_oled(mode,joystickmode)
 while True:
     oldmode = mode
     #read uart if bytes are available
@@ -187,25 +200,33 @@ while True:
 #            mode = 1
     #check to see if layout switch putton is pressed.
     if layoutChangeButton.value == False and layoutChangeButton != oldLayoutButtonValue:
-        oldLayoutButtonValue = False
+        
+        layout_num = layout_num +1
+        if layout_num >2:
+            layout_num = 1
+        
+        if layout_num == 1:
+            gamepad_buttons = gamepad_buttons1 
+        elif layout_num == 2:
+            gamepad_buttons = gamepad_buttons_layout_default 
+        debounce()
+        print(" top button pressed... now:", gamepad_buttons)
+        print("layout num is:", layout_num)
+        oldLayoutButtonValue = True
+        update_oled(mode,joystickmode)
+        
+        
+        
+    if JoystickChangeButton.value == False and layoutChangeButton != oldLayoutButtonValue:
+        
         if joystickmode == "analog":
             joystickmode = "digital"
         else:
             joystickmode = "analog"
-        layout_num = layout_num +1
-        if layout_num > 2:
-            layout_num = 1
         debounce()
-
-        if layout_num == 1:
-            gamepad_buttons = gamepad_buttons_layout_default 
-        elif layout_num == 2:
-            gamepad_buttons = gamepad_buttons 
-        else:
-            gamepad_buttons = gamepad_buttons_layout_default 
-        print("1 gp buttons changed via press... now:", gamepad_buttons)
         print("joystick mode is now:", joystickmode)
-        oldLayoutButtonValue = True
+        oldJoystickMode = joystickmode
+        update_oled(mode,joystickmode)
     
     if (count >= 1000):
         count = 0
@@ -229,8 +250,8 @@ while True:
                 print("2 gamepad buttons changed via uart... now they are:", gamepad_buttons)
     
     if int(mode) >=1 and int(mode) <= 5:
-        if mode != oldmode:
-            update_oled(mode)
+        if mode != oldmode or joystickmode != oldJoystickMode:
+            update_oled(mode,joystickmode)
     
     if mode == 1:
 
@@ -240,13 +261,13 @@ while True:
             sety = 0
             #Not keyboard presses for directional
             #So check them seperately first
-            if not buttons[12].value:
+            if not buttons[11].value:
                 sety = -127
-            if not buttons[13].value:
+            if not buttons[12].value:
                 sety = 127
-            if not buttons[14].value:
+            if not buttons[13].value:
                 setx = -127
-            if not buttons[15].value:
+            if not buttons[14].value:
                 setx = 127
             #Set Joystick movements
             gp.move_joysticks(
@@ -262,6 +283,7 @@ while True:
                     if button.value:
                         gp.release_buttons(gamepad_button_num)
                     else:
+                        print("button",i,"=",button.value, "was pressed")
                         gp.press_buttons(gamepad_button_num)
         
         else:
