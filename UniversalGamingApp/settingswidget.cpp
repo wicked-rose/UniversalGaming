@@ -131,8 +131,9 @@ void SettingsWidget::fillPortsInfo()
              << (productId ? QString::number(productId, 16) : blankString);
 
         m_ui->serialPortInfoListBox->addItem(list.constFirst(), list);
-        QString id = "80f2";
-        if(productId == id){
+        QString desc = "USB Serial Device";
+        int x = QString::compare(description,desc);
+        if(x == 0){
             m_currentSettings.name = m_ui->serialPortInfoListBox->currentText();
         }
     }
