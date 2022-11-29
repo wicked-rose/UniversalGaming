@@ -47,7 +47,6 @@ private:
     void fillPortsParameters();
     void fillPortsInfo();
 
-
 private:
     Ui::SettingsWidget *m_ui = nullptr;
     Settings m_currentSettings;

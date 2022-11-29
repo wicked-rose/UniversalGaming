@@ -33,7 +33,6 @@ private:
 //    terminalWindow *win = nullptr;
     SettingsWidget *m_settings = nullptr;
     Console *m_console = nullptr;
-//    QWidget *mySettingsWidget = nullptr;
 //    QSerialPort *m_serial = nullptr;
 };
 #endif // MAINWINDOW_H

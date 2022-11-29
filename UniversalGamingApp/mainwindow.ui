@@ -73,6 +73,45 @@
      <attribute name="title">
       <string>On-Screen Options</string>
      </attribute>
+     <widget class="QLabel" name="TextToSpeech">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>301</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Choose Your On-Screen Accessibilty Options</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ColorBlindMode">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Color Blind Mode</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Text to Speech</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="TestTab">
      <attribute name="title">

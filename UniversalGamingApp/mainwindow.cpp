@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
       m_console(new Console),
-      m_settings(new SettingsWidget)
+      m_settings(new SettingsWidget(this))
 {
     m_ui->setupUi(this);
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
@@ -25,13 +25,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::apply()
 {
+    //qDebug() << "apply clicked";
     m_settings->updateSettings();
-
-    //std::cout << m_settings-> << std::endl;
+    //qDebug() << "Updated Baud: " << m_settings->settings().baudRate;
     terminalWindow *win = new terminalWindow(this, m_settings);
     if(win != nullptr){
         win->show();
     }
-    //hide();
 }
 

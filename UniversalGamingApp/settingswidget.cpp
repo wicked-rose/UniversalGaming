@@ -5,7 +5,7 @@
 #include <QLineEdit>
 #include <QSerialPortInfo>
 
-static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
+static const char blankString[] = QT_TRANSLATE_NOOP("SettingsWidget", "N/A");
 
 SettingsWidget::SettingsWidget(QWidget *parent) :
     QWidget(parent),
@@ -131,6 +131,9 @@ void SettingsWidget::fillPortsInfo()
              << (productId ? QString::number(productId, 16) : blankString);
 
         m_ui->serialPortInfoListBox->addItem(list.constFirst(), list);
+        if(serialNumber == "4636383835113C3D"){
+            m_currentSettings.name = m_ui->serialPortInfoListBox->currentText();
+        }
     }
 
     m_ui->serialPortInfoListBox->addItem(tr("Custom"));

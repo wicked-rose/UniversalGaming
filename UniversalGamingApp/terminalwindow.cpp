@@ -11,9 +11,11 @@ terminalWindow::terminalWindow(QWidget *parent, SettingsWidget *m_currSettings) 
     m_ui(new Ui::terminalWindow),
     m_console(new Console),
     m_status(new QLabel),
-    m_serial(new QSerialPort(this))
+    m_serial(new QSerialPort(this)),
+    m_settingsWidget(new SettingsWidget)
 {
     m_settingsWidget = m_currSettings;
+
     m_ui->setupUi(this);
     m_console->setEnabled(false);
     setCentralWidget(m_console);
@@ -38,7 +40,9 @@ terminalWindow::~terminalWindow()
 void terminalWindow::openSerialPort()
 {
     const SettingsWidget::Settings p = m_settingsWidget->settings();
-    m_serial->setPortName(p.name);
+    //qDebug() << "Serial Open Baud: " << p.baudRate;
+    //m_serial->setPortName(p.name);
+    m_serial->setPortName("COM7");
     m_serial->setBaudRate(p.baudRate);
     m_serial->setDataBits(p.dataBits);
     m_serial->setParity(p.parity);
