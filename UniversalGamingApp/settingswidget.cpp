@@ -131,7 +131,8 @@ void SettingsWidget::fillPortsInfo()
              << (productId ? QString::number(productId, 16) : blankString);
 
         m_ui->serialPortInfoListBox->addItem(list.constFirst(), list);
-        if(serialNumber == "4636383835113C3D"){
+        QString id = "80f2";
+        if(productId == id){
             m_currentSettings.name = m_ui->serialPortInfoListBox->currentText();
         }
     }
