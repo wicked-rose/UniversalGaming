@@ -42,7 +42,7 @@ void terminalWindow::openSerialPort()
     const SettingsWidget::Settings p = m_settingsWidget->settings();
     //qDebug() << "Serial Open Baud: " << p.baudRate;
     //m_serial->setPortName(p.name);
-    m_serial->setPortName("COM7");
+    m_serial->setPortName("COM3");
     m_serial->setBaudRate(p.baudRate);
     m_serial->setDataBits(p.dataBits);
     m_serial->setParity(p.parity);
