@@ -52,7 +52,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="HomeTab">
      <attribute name="title">
@@ -63,6 +63,16 @@
      <attribute name="title">
       <string>Preset Layouts</string>
      </attribute>
+     <widget class="ControllerLayout" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>441</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="CustomTab">
      <attribute name="title">
@@ -243,6 +253,12 @@
    <class>SettingsWidget</class>
    <extends>QWidget</extends>
    <header location="global">settingswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControllerLayout</class>
+   <extends>QWidget</extends>
+   <header location="global">controllerlayout.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

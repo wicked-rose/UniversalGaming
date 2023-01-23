@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_ui(new Ui::MainWindow),
       m_console(new Console),
       m_settings(new SettingsWidget(this))
+     // m_layout(new ControllerLayout(this))
 {
     m_ui->setupUi(this);
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);

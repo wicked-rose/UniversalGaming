@@ -9,7 +9,7 @@
 #include "terminalwindow.h"
 #include "settingswidget.h"
 #include "console.h"
-//#include "settingswidget.h"
+#include "controllerlayout.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -33,6 +33,7 @@ private:
 //    terminalWindow *win = nullptr;
     SettingsWidget *m_settings = nullptr;
     Console *m_console = nullptr;
+ //   ControllerLayout *m_layout = nullptr;
 //    QSerialPort *m_serial = nullptr;
 };
 #endif // MAINWINDOW_H
