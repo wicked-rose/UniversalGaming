@@ -2,6 +2,10 @@
 #define CONTROLLERLAYOUT_H
 
 #include <QWidget>
+#include <QSerialPort>
+#include <QLabel>
+#include <QStatusBar>
+#include <QMessageBox>
 
 namespace Ui {
 class ControllerLayout;
@@ -17,10 +21,16 @@ public:
     void fillLayoutOptions();
     void setControllerLayout(int index);
     void select();
+    void openSerialPort();
+    void closeSerialPort();
+    void showStatusMessage(const QString &message);
 
 private:
-    Ui::ControllerLayout *ui;
+    Ui::ControllerLayout *ui;     
     int currLayout;
+    QSerialPort *m_serial = nullptr;
+    QStatusBar *statusBar = nullptr;
+    QLabel *m_status = nullptr;
 };
 
 #endif // CONTROLLERLAYOUT_H
