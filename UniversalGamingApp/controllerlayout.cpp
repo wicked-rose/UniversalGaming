@@ -52,6 +52,7 @@ void ControllerLayout::select()
 
     QByteArray writeData;
     writeData.setNum(currLayout);
+    qDebug() << writeData;
     m_serial->write(writeData);
 
     closeSerialPort();
@@ -59,8 +60,9 @@ void ControllerLayout::select()
 
 void ControllerLayout::openSerialPort()
 {
+    // read heartbeat signal, if matches pico ID, connect
     // connect to serial port
-    m_serial->setPortName("COM3");
+    m_serial->setPortName("COM5");
     m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
     m_serial->setParity(QSerialPort::OddParity);
