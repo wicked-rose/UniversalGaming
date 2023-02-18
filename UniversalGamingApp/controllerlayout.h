@@ -21,7 +21,7 @@ public:
     void fillLayoutOptions();
     void setControllerLayout(int index);
     void select();
-    void openSerialPort();
+    void openSerialPort(QString name);
     void closeSerialPort();
     void showStatusMessage(const QString &message);
 

@@ -1,5 +1,7 @@
 #include "controllerlayout.h"
 #include "ui_controllerlayout.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 ControllerLayout::ControllerLayout(QWidget *parent) :
     QWidget(parent),
@@ -31,7 +33,8 @@ void ControllerLayout::fillLayoutOptions()
 {
     ui->selectLayoutBox->addItem(QStringLiteral("1. Gamepad"), 1);
     ui->selectLayoutBox->addItem(QStringLiteral("2. Keyboard"), 2);
-    ui->selectLayoutBox->addItem(QStringLiteral("3. Anotha One"), 3);
+    ui->selectLayoutBox->addItem(QStringLiteral("3. FPS"), 3);
+    ui->selectLayoutBox->addItem(QStringLiteral("4. Mouse"), 4);
 }
 
 void ControllerLayout::setControllerLayout(int index)
@@ -48,7 +51,20 @@ void ControllerLayout::select()
 {
     // how to determine/auto detect which com port the comtroller will use,
     // or, other way to identify controller as device we want to connect to
-    openSerialPort();
+    // const QString blankString = tr(::blankString);
+    const auto infos = QSerialPortInfo::availablePorts();
+    QString portName = "COM4";
+    const auto goalId = '239a';
+
+    for (const QSerialPortInfo &info : infos) {
+        QStringList list;
+        const auto vendorId = info.vendorIdentifier();
+        //const auto productId = info.productIdentifier();
+        if(vendorId == goalId){
+            portName = info.portName();
+        }
+    }
+    openSerialPort(portName);
 
     QByteArray writeData;
     writeData.setNum(currLayout);
@@ -58,11 +74,11 @@ void ControllerLayout::select()
     closeSerialPort();
 }
 
-void ControllerLayout::openSerialPort()
+void ControllerLayout::openSerialPort(QString name)
 {
     // read heartbeat signal, if matches pico ID, connect
     // connect to serial port
-    m_serial->setPortName("COM5");
+    m_serial->setPortName(name);
     m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
     m_serial->setParity(QSerialPort::OddParity);
