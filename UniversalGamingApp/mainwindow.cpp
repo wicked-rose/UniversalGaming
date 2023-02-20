@@ -4,6 +4,8 @@
 #include "qlayout.h"
 #include "controllerlayout.h"
 #include "customlayout.h"
+#include "tts.h"
+#include "global.h"
 
 #include <QSerialPort>
 #include <iostream>
@@ -34,6 +36,23 @@ void MainWindow::apply()
     terminalWindow *win = new terminalWindow(this, m_settings);
     if(win != nullptr){
         win->show();
+    }
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    Global::isEnabled = !Global::isEnabled;
+    if(Global::isEnabled){
+        // Create the text-to-speech object
+        QTextToSpeech *text_to_speech = new QTextToSpeech();
+        text_to_speech->say("Text to Speech enabled");
+        tts *TTS_button = new tts(m_ui->pushButton);
+        tts *CB_button = new tts(m_ui->ColorBlindMode);
+    }
+    else {
+        QTextToSpeech *text_to_speech = new QTextToSpeech();
+        text_to_speech->say("Text to Speech disabled");
     }
 }
 

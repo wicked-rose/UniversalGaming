@@ -28,6 +28,8 @@ public:
 private slots:
     void apply();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *m_ui;
 //    terminalWindow *win = nullptr;

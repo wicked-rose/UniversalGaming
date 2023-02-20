@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS SerialPort Widgets Gui Core)
+find_package(Qt6 COMPONENTS TextToSpeech REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -19,7 +20,9 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         customtabstyle.h
-        console.h console.cpp
+        console.h console.cpp	
+        tts.h tts.cpp
+        global.h global.cpp
         settingswidget.h settingswidget.cpp settingswidget.ui
         terminalwindow.h terminalwindow.cpp terminalwindow.ui
         controllerlayout.h controllerlayout.cpp controllerlayout.ui
@@ -33,7 +36,7 @@ qt_add_executable(UniversalGamingApp
         ${PROJECT_SOURCES}
     )
 
-target_link_libraries(UniversalGamingApp PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+target_link_libraries(UniversalGamingApp PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::TextToSpeech
     Qt6::SerialPort
     Qt6::Gui
     Qt6::Core
