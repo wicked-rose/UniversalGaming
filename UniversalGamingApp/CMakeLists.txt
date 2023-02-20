@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         settingswidget.h settingswidget.cpp settingswidget.ui
         terminalwindow.h terminalwindow.cpp terminalwindow.ui
         controllerlayout.h controllerlayout.cpp controllerlayout.ui
+        customlayout.h customlayout.cpp customlayout.ui
 )
 
 list(APPEND CMAKE_PREFIX_PATH "~/Qt/6.4.1/mingw_64")
