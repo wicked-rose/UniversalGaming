@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include "customtabstyle.h"
 #include "qlayout.h"
+#include "controllerlayout.h"
+#include "customlayout.h"
 
 #include <QSerialPort>
 #include <iostream>
