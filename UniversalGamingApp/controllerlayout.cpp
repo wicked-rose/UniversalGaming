@@ -49,18 +49,14 @@ void ControllerLayout::setControllerLayout(int index)
 
 void ControllerLayout::select()
 {
-    // how to determine/auto detect which com port the comtroller will use,
-    // or, other way to identify controller as device we want to connect to
-    // const QString blankString = tr(::blankString);
     const auto infos = QSerialPortInfo::availablePorts();
-    QString portName = "COM4";
-    const auto goalId = '239a';
+    QString portName = "COM6";
+    QString goalId = "463638";
 
     for (const QSerialPortInfo &info : infos) {
-        QStringList list;
-        const auto vendorId = info.vendorIdentifier();
-        //const auto productId = info.productIdentifier();
-        if(vendorId == goalId){
+        const auto serialNum = info.serialNumber();
+        QString str = serialNum.left(6);
+        if(str == goalId){
             portName = info.portName();
         }
     }
@@ -68,7 +64,6 @@ void ControllerLayout::select()
 
     QByteArray writeData;
     writeData.setNum(currLayout);
-    qDebug() << writeData;
     m_serial->write(writeData);
 
     closeSerialPort();

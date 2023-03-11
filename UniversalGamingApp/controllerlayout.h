@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QStatusBar>
 #include <QMessageBox>
+#include <QString>
 
 namespace Ui {
 class ControllerLayout;
