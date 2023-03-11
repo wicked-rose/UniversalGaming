@@ -17,68 +17,62 @@
    <enum>Qt::ToolButtonTextOnly</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="menuTabWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>821</width>
-      <height>461</height>
-     </rect>
-    </property>
-    <property name="baseSize">
-     <size>
-      <width>0</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <family>Dubai Medium</family>
-      <pointsize>12</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::West</enum>
-    </property>
-    <property name="tabShape">
-     <enum>QTabWidget::Rounded</enum>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="HomeTab">
-     <attribute name="title">
-      <string>Home</string>
-     </attribute>
-     <widget class="QTextEdit" name="textEdit">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>651</width>
-        <height>441</height>
-       </rect>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="menuTabWidget">
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
       </property>
       <property name="font">
        <font>
-        <family>Calibri</family>
+        <family>Dubai Medium</family>
         <pointsize>12</pointsize>
         <bold>false</bold>
        </font>
       </property>
-      <property name="readOnly">
-       <bool>true</bool>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
       </property>
-      <property name="html">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="HomeTab">
+       <attribute name="title">
+        <string>Home</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTextEdit" name="textEdit">
+          <property name="font">
+           <font>
+            <family>Calibri</family>
+            <pointsize>12</pointsize>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
@@ -89,125 +83,115 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI';&quot;&gt;This accessible, adaptable gaming controller is a versatile device designed for individuals with disabilities to easily access and enjoy gaming. The controller is specially engineered to be highly adaptable and customizable, ensuring that users can tailor the device to their unique needs and preferences.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI';&quot;&gt;The controller is crafted from high-quality, durable materials that provide a comfortable grip for users. It features a range of accessible buttons, toggles, and joysticks, all of which are designed to be easily reached and used by gamers of all abilities. The controller even comes with external attachments to give an even wider range of interaction options. Through this application, gamers can also access on-screen accessibility options such as colorblind modes for PC gaming.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI';&quot;&gt;The controller's adaptability extends to its connectivity options. It can be easily connected to a wide range of devices, including PCs and gaming consoles, making it a truly versatile gaming accessory.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="PresetTab">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>Preset Layouts</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="ControllerLayout" name="widget_2" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="CustomTab">
+       <attribute name="title">
+        <string>Custom Layout</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="CustomLayout" name="customLayout" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="OnScreenTab">
+       <attribute name="title">
+        <string>On-Screen Options</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="TextToSpeech">
+          <property name="text">
+           <string>Choose Your On-Screen Accessibilty Options</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ColorBlindMode">
+          <property name="text">
+           <string>Color Blind Mode</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Text to Speech</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="TestTab">
+       <attribute name="title">
+        <string>Test Controller</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="SettingsWidget" name="widget" native="true">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>96</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="applyButton">
+            <property name="text">
+             <string>Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="PresetTab">
-     <attribute name="title">
-      <string>Preset Layouts</string>
-     </attribute>
-     <widget class="ControllerLayout" name="widget_2" native="true">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>761</width>
-        <height>441</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="CustomTab">
-     <attribute name="title">
-      <string>Custom Layout</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="OnScreenTab">
-     <attribute name="title">
-      <string>On-Screen Options</string>
-     </attribute>
-     <widget class="QLabel" name="TextToSpeech">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>301</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Choose Your On-Screen Accessibilty Options</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="ColorBlindMode">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>151</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Color Blind Mode</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>80</y>
-        <width>151</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Text to Speech</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="TestTab">
-     <attribute name="title">
-      <string>Test Controller</string>
-     </attribute>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>390</y>
-        <width>621</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>96</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="applyButton">
-         <property name="text">
-          <string>Apply</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="SettingsWidget" name="widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>761</width>
-        <height>341</height>
-       </rect>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
    <property name="icon">
     <iconset>
@@ -292,6 +276,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <class>ControllerLayout</class>
    <extends>QWidget</extends>
    <header location="global">controllerlayout.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CustomLayout</class>
+   <extends>QWidget</extends>
+   <header location="global">customlayout.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
