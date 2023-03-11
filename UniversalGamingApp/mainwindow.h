@@ -27,15 +27,14 @@ public:
 
 private slots:
     void apply();
-
     void on_pushButton_clicked();
+public slots:
+    void displayStatusMessage(QString message);
 
 private:
     Ui::MainWindow *m_ui;
-//    terminalWindow *win = nullptr;
     SettingsWidget *m_settings = nullptr;
     Console *m_console = nullptr;
     ControllerLayout *m_layout = nullptr;
-//    QSerialPort *m_serial = nullptr;
 };
 #endif // MAINWINDOW_H

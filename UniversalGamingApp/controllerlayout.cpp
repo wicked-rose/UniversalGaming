@@ -6,9 +6,7 @@
 ControllerLayout::ControllerLayout(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ControllerLayout),
-    statusBar(new QStatusBar(this)),
-    m_serial(new QSerialPort),
-    m_status(new QLabel)
+    m_serial(new QSerialPort)
 {
     ui->setupUi(this);
 
@@ -16,10 +14,6 @@ ControllerLayout::ControllerLayout(QWidget *parent) :
             this, &ControllerLayout::setControllerLayout);
     connect(ui->selectButton, &QPushButton::clicked,
             this, &ControllerLayout::select);
-
-    this->statusBar->show();
-    this->statusBar->addWidget(m_status);
-    //ui->statusBar->addWidget(m_status);
 
     fillLayoutOptions();
 }
@@ -35,6 +29,7 @@ void ControllerLayout::fillLayoutOptions()
     ui->selectLayoutBox->addItem(QStringLiteral("2. Keyboard"), 2);
     ui->selectLayoutBox->addItem(QStringLiteral("3. FPS"), 3);
     ui->selectLayoutBox->addItem(QStringLiteral("4. Mouse"), 4);
+    emit sendStatus("Preset Layouts");
 }
 
 void ControllerLayout::setControllerLayout(int index)
@@ -44,13 +39,12 @@ void ControllerLayout::setControllerLayout(int index)
     ui->selectionLabel->setText(tr("Layout Selected: %1").arg(ui->selectLayoutBox->itemData(index).toString()));
 
     currLayout = ui->selectLayoutBox->currentData().toInt();
-    qDebug() << currLayout;
 }
 
 void ControllerLayout::select()
 {
     const auto infos = QSerialPortInfo::availablePorts();
-    QString portName = "COM6";
+    QString portName = "COM3";
     QString goalId = "463638";
 
     for (const QSerialPortInfo &info : infos) {
@@ -60,19 +54,21 @@ void ControllerLayout::select()
             portName = info.portName();
         }
     }
+    qDebug() << portName;
     openSerialPort(portName);
 
     QByteArray writeData;
     writeData.setNum(currLayout);
     m_serial->write(writeData);
 
+        qDebug() << "sent "+writeData+" over serial";
     closeSerialPort();
 }
 
 void ControllerLayout::openSerialPort(QString name)
 {
-    // read heartbeat signal, if matches pico ID, connect
-    // connect to serial port
+    qDebug() << "opening serial port";
+    emit sendStatus("Opening serial connection...");
     m_serial->setPortName(name);
     m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
@@ -80,23 +76,22 @@ void ControllerLayout::openSerialPort(QString name)
     m_serial->setStopBits(QSerialPort::OneStop);
     m_serial->setFlowControl( QSerialPort::NoFlowControl);
     if (m_serial->open(QIODevice::ReadWrite)) {
-        //showStatusMessage(tr("Connected"));
+        qDebug() << "serial connected";
+        emit sendStatus("Connected");
     } else {
         QMessageBox::critical(this, tr("Error"), m_serial->errorString());
-        //showStatusMessage(tr("Open error"));
+        emit sendStatus("Open error");
     }
 
 }
 
 void ControllerLayout::closeSerialPort()
 {
-    if (m_serial->isOpen())
+    if (m_serial->isOpen()){
+        qDebug() << "closing serial port";
         m_serial->close();
-    //showStatusMessage(tr("Disconnected"));
+        emit sendStatus("Disconnected");
+    }
 }
 
-void ControllerLayout::showStatusMessage(const QString &message)
-{
-    m_status->setText(message);
-}
 
