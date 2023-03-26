@@ -76,6 +76,7 @@ void terminalWindow::closeSerialPort()
 void terminalWindow::writeData(const QByteArray &data)
 {
     m_serial->write(data);
+    qDebug() << data;
 }
 
 void terminalWindow::readData()

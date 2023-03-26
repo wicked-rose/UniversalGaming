@@ -15,12 +15,19 @@ MainWindow::MainWindow(QWidget *parent)
       m_ui(new Ui::MainWindow),
       m_console(new Console),
       m_settings(new SettingsWidget),
-      m_layout(new ControllerLayout)
+      m_layout(new ControllerLayout),
+      m_custom(new CustomLayout)
 {
     m_ui->setupUi(this);
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
     connect(m_ui->applyButton, &QPushButton::clicked,
             this, &MainWindow::apply);
+
+    connect(m_layout, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
+    //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
+
+    m_ui->statusBar->show();
+    displayStatusMessage("Ready...");
 };
 
 MainWindow::~MainWindow()
@@ -30,15 +37,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::apply()
 {
-    //qDebug() << "apply clicked";
     m_settings->updateSettings();
-    //qDebug() << "Updated Baud: " << m_settings->settings().baudRate;
     terminalWindow *win = new terminalWindow(this, m_settings);
     if(win != nullptr){
         win->show();
     }
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -54,5 +58,9 @@ void MainWindow::on_pushButton_clicked()
         QTextToSpeech *text_to_speech = new QTextToSpeech();
         text_to_speech->say("Text to Speech disabled");
     }
+}
+
+void MainWindow::displayStatusMessage(QString message){
+    m_ui->statusBar->showMessage(message);
 }
 
