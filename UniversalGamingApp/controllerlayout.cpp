@@ -57,11 +57,11 @@ void ControllerLayout::select()
     qDebug() << portName;
     openSerialPort(portName);
 
-    QByteArray writeData;
-    writeData.setNum(currLayout);
+    QByteArray writeData("2");
+   // writeData.setNum(currLayout);
     m_serial->write(writeData);
 
-        qDebug() << "sent "+writeData+" over serial";
+    qDebug() << "sent "+writeData+" over serial";
     closeSerialPort();
 }
 
@@ -72,9 +72,11 @@ void ControllerLayout::openSerialPort(QString name)
     m_serial->setPortName(name);
     m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
-    m_serial->setParity(QSerialPort::OddParity);
+    m_serial->setParity(QSerialPort::NoParity);
     m_serial->setStopBits(QSerialPort::OneStop);
     m_serial->setFlowControl( QSerialPort::NoFlowControl);
+    //m_serial->open(QIODevice::ReadWrite);
+
     if (m_serial->open(QIODevice::ReadWrite)) {
         qDebug() << "serial connected";
         emit sendStatus("Connected");

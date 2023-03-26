@@ -10,6 +10,7 @@
 #include "settingswidget.h"
 #include "console.h"
 #include "controllerlayout.h"
+#include "customlayout.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,5 +37,6 @@ private:
     SettingsWidget *m_settings = nullptr;
     Console *m_console = nullptr;
     ControllerLayout *m_layout = nullptr;
+    CustomLayout *m_custom = nullptr;
 };
 #endif // MAINWINDOW_H

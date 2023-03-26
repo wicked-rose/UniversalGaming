@@ -4,9 +4,27 @@
 CustomLayout::CustomLayout(QWidget *parent) :
     QWidget(parent),
     m_ui(new Ui::CustomLayout),
-        m_serial(new QSerialPort)
+    m_serial(new QSerialPort),
+    thisBox1(new MyComboBox(this,1)),
+    thisBox2(new MyComboBox(this,2)),
+    thisBox3(new MyComboBox(this,3)),
+    thisBox4(new MyComboBox(this,4)),
+    thisBox5(new MyComboBox(this,5)),
+    thisBox6(new MyComboBox(this,6)),
+    thisBox7(new MyComboBox(this,7)),
+    thisBox8(new MyComboBox(this,8)),
+    thisBox9(new MyComboBox(this,9)),
+    thisBox10(new MyComboBox(this,10)),
+    thisBox11(new MyComboBox(this,11)),
+    thisBox12(new MyComboBox(this,12)),
+    thisBox13(new MyComboBox(this,13)),
+    thisBox14(new MyComboBox(this,14)),
+    thisBox15(new MyComboBox(this,15)),
+    thisBox16(new MyComboBox(this,16))
 {
     m_ui->setupUi(this);
+    addOptions();
+   // updateLayout();
 }
 
 CustomLayout::~CustomLayout()
@@ -15,35 +33,45 @@ CustomLayout::~CustomLayout()
 }
 
 void CustomLayout::addOptions(){
-    // for each box in boxes
-    QString thisBox = "1";
-    m_ui->box1->addItem("Button 2", ("remap 1 2"));
+    //QHBoxLayout *layout = new QHBoxLayout(this);
+    //thisBox1->thisBox.setParent(this);
+    m_ui->leftLayout->addWidget(thisBox1);
+
+   // m_ui->box1->addItems({"Button 1","Button 2","Button 3","Button 4","Button 5",
+   //                     "Button 6","Button 7","Button 8","Button 9","Button 10",
+   //                     "Button 11","Button 12","Button 13","Button 14","Button 15","Button 16"});
+}
+
+void CustomLayout::updateLayout(int thisIndex, int newIndex){
+    // send serial instruction
+    // " remap " + this index + chosen index
+    openSerialPort(portName);
+
+     QString data = "remap " + QString::number(thisIndex) + " " + QString::number(newIndex);
+    qDebug() << data;
+    QByteArray writeData = data.toLatin1();
+   // writeData.QByteArray::fromHex(data.toUTF8());
+    m_serial->write(writeData);
+
+    closeSerialPort();
 }
 
 void CustomLayout::select(){
-    // how to determine/auto detect which com port the comtroller will use,
-    // or, other way to identify controller as device we want to connect to
-    // const QString blankString = tr(::blankString);
+    // change later to continuously send remap over serial on ComboBox click
     const auto infos = QSerialPortInfo::availablePorts();
-    QString portName = "COM4";
-    const auto goalId = '239a';
+    portName = "COM3";
+    QString goalId = "463638";
 
     for (const QSerialPortInfo &info : infos) {
-        QStringList list;
-        const auto vendorId = info.vendorIdentifier();
-        //const auto productId = info.productIdentifier();
-        if(vendorId == goalId){
+        const auto serialNum = info.serialNumber();
+        QString str = serialNum.left(6);
+        if(str == goalId){
             portName = info.portName();
         }
     }
     openSerialPort(portName);
 
-
-    QString str = "remap 1 5";
-    QByteArray writeData;
-   // writeData.QByteArray::fromHex(str.toUTF8());
-    qDebug() << writeData;
-    m_serial->write(writeData);
+    //updateLayout();
 
     closeSerialPort();
 

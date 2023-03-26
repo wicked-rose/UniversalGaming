@@ -15,13 +15,17 @@ MainWindow::MainWindow(QWidget *parent)
       m_ui(new Ui::MainWindow),
       m_console(new Console),
       m_settings(new SettingsWidget),
-      m_layout(new ControllerLayout)
+      m_layout(new ControllerLayout),
+      m_custom(new CustomLayout)
 {
     m_ui->setupUi(this);
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
     connect(m_ui->applyButton, &QPushButton::clicked,
             this, &MainWindow::apply);
+
     connect(m_layout, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
+    //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
+
     m_ui->statusBar->show();
     displayStatusMessage("Ready...");
 };
@@ -39,7 +43,6 @@ void MainWindow::apply()
         win->show();
     }
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
