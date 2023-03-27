@@ -36,9 +36,9 @@ public:
         int thisIndex = 0;
 
         MyComboBox(QWidget *parent = nullptr, int index = 0): QComboBox(parent){
-            addItems({"Button 1","Button 2","Button 3","Button 4","Button 5",
-                      "Button 6","Button 7","Button 8","Button 9","Button 10",
-                      "Button 11","Button 12","Button 13","Button 14","Button 15","Button 16"});
+            addItems({"Button 0","Button 1","Button 2","Button 3","Button 4",
+                      "Button 5","Button 6","Button 7","Button 8","Button 9",
+                      "Button 10","Button 11","Button 12","Button 13","Button 14","Button 15"});
 
             thisIndex = index;
             setCurrentIndex(thisIndex-1);

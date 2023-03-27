@@ -60,7 +60,7 @@ void ControllerLayout::select()
     openSerialPort(portName);
 
     // send data
-    string data = "off\x0D"; //"to_string(currLayout) + "\x0D";
+    string data = to_string(currLayout) + "\x0D";
     const char *c_str = data.c_str();
     const QByteArray writeData(c_str);
 
