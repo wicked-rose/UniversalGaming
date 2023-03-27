@@ -11,11 +11,10 @@ import adafruit_displayio_ssd1306
 import terminalio
 import displayio
 import busio
-from adafruit_mcp230xx.mcp23017 import MCP23017
 
 import supervisor
 
-from digitalio import Direction, Pull
+import functions
 
 from time import sleep
 
@@ -53,14 +52,12 @@ board.SCK,board.MOSI,   #SCK = 2,  MOSI = 3      SQR  TRI
 board.D6,board.MISO,    #D6 = 4,   MISO = 5      L1   R1    
 board.D4,board.TX,      #D4 = 6,   TX = 7        L2   R2
 board.RX,board.D5,      #RX = 8,   D5 = 9        SEL  STRT
-#board.D10,
-board.A2,     #D9 = 10,  A2 = 11       L3   R3 dont rlly matter for now
-board.D9,
-#board.D11,     #D12 = 12, D11 = 13      UP   DOWN 
-#board.D12,              #D10 = 14,               LFT  RGT
-#board.D13               #D11 = 15
+board.D10,board.A2,     #D9 = 10,  A2 = 11       L3   R3 dont rlly matter for now
+board.D9,board.D13,     #D12 = 12, D11 = 13      UP   DOWN 
+board.D12,              #D10 = 14,               LFT  RGT
+board.D11               #D11 = 15
 )
-"""
+
 def update_oled(mode,joystickmode):
     splash = displayio.Group()
     display.show(splash)
@@ -83,7 +80,7 @@ def update_oled(mode,joystickmode):
         terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=43
     )
     splash.append(text_area)
-"""
+
 def parse_remap_string(input_string):
     
         if (len(input_string.split()) < 3 or len(input_string.split()) > 3):
@@ -149,6 +146,7 @@ def range_map(x, in_min, in_max, out_min, out_max):
 # gamepad_buttons[i] will send that button number when buttons[i]
 # x's mean i dont have 
 # is pushed.                        #x  x 
+gamepad_buttons_inorder =           (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16)
 gamepad_buttons_rogueLegacy =       (2, 3, 1,4, 7, 8, 5,6, 9, 10, 11, 12, 13, 14, 15,16)
 
 gamepad_buttons0 =                  (2, 4, 3, 1, 6, 7, 13, 16, 13, 15, 8, 9, 10, 9, 8,2)
@@ -186,54 +184,7 @@ WIDTH = 128
 HEIGHT = 64
 BORDER = 5
 
-
-
-#i2c1 = busio.I2C(board.D11, board.D10) # DISPLAY OLEDS
-i2c0 = busio.I2C(board.D13, board.D12) # MCPS
-#board.D11.deinit()
-#board.D10.deinit()
-
-"""
-success = False
-success = i2c0.try_lock()
-print(success)
-i2c0.try_lock()
-while not i2c0.try_lock():
-    print("hi")
-    i2c0.unlock()
-    i2c1 = busio.I2C(board.SCL, board.SDA) # DISPLAY OLEDS
-    pass
-
-"""
-mcp1 = MCP23017(i2c0, address=0x21)
-mcp0 = MCP23017(i2c0, address=0x20)
-#display_bus = displayio.I2CDisplay(i2c1, device_address=0x3C)
 buttons = [digitalio.DigitalInOut(pin) for pin in button_pins]
-
-pins  = []
-pins0 = []
-pins1 = []
-for pin in range(0, 16):
-    pins0.append(mcp0.get_pin(pin))
-    pins1.append(mcp1.get_pin(pin))
-    
-for pin in pins0:
-    pin.direction = Direction.INPUT
-    pin.pull = Pull.UP
-for pin in pins1:    
-    pin.direction = Direction.INPUT
-    pin.pull = Pull.UP
-    
-for pin in pins0:
-    buttons.append(pin)
-for pin in pins1:
-    buttons.append(pin)
-    
-
-
-gamepad_buttons_inorder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-for pin in range(0,len(buttons)-15):
-    gamepad_buttons_inorder.append((pin%15) + 1)
 
 #modeChangeButton = digitalio.DigitalInOut(board.RX)
 #modeChangeButton.direction = digitalio.Direction.INPUT
@@ -256,26 +207,26 @@ for button in buttons:
 ax = analogio.AnalogIn(board.A1)
 ay = analogio.AnalogIn(board.A0)
 
-#displayio.release_displays()
+displayio.release_displays()
 
 
 # Use for I2C for display
-
+i2c = busio.I2C(board.SCL, board.SDA)
+display_bus = displayio.I2CDisplay(i2c, device_address=0x3C)
 
 #Equivalent of Arduino's map() function
 def range_map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
   
 
-#display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
+display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
 
 #Make the display context.
-#splash = displayio.Group()
-#display.show(splash)
+splash = displayio.Group()
+display.show(splash)
 
 # Draw a label
 
-"""
 text = "Mode : " + str(mode)
 text_area = label.Label(
 terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=3
@@ -286,9 +237,9 @@ text_area = label.Label(
     terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=23
 )
 splash.append(text_area)
-"""
+
 def debounce():
-    sleep(5)
+    sleep(0.2)
 
 #defaults
 mode = 1
@@ -301,7 +252,7 @@ joystickmode = "analog"
 oldJoystickMode = "analog"
 gamepad_buttons = list(gamepad_buttons_inorder)
 
-#update_oled(mode,joystickmode)
+update_oled(mode,joystickmode)
 
 print("Hello! Universal Gaming Controller Now Active.")
 print("Joystick Mode: ",joystickmode, ". Button Layout: Default.")
@@ -317,8 +268,7 @@ while True:
             if mode >= 1 and mode <= 5:
                 mode = serialRead
                 if mode != oldmode or joystickmode != oldJoystickMode:
-                    #update_oled(mode,joystickmode)
-                    print(mode,joystickmode)
+                    update_oled(mode,joystickmode)
             else:
                 mode = mode
         elif type(serialRead) == type("string") and serialRead != "": #if serial stuff is not a number:.
@@ -334,8 +284,7 @@ while True:
                 debounce()
                 print("joystick mode is now:", joystickmode)
                 oldJoystickMode = joystickmode
-                #update_oled(mode,joystickmode)
-                print(mode,joystickmode)
+                update_oled(mode,joystickmode)
             elif serialRead.split()[0] == "remap":
                 x,y = parse_remap_string(serialRead)
                 if (x == -1  or y == -1):
@@ -350,34 +299,62 @@ while True:
                 gamepad_buttons = list(gamepad_buttons_rogueLegacy)
                 print("here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
         
-    #if (count >= 1000):
-    #    count = 0
+    if (count >= 1000):
+        count = 0
         #print("heartbeat")
-    #count = count +1
+    count = count +1
     
     
     if mode == 1: #when in gamepad mode...
-        gp.move_joysticks(
-        x =range_map(ax.value, 0, 65535, -127, 127),
-        y =range_map(ay.value, 0, 65535, 127, -127),
-        )
-        pressed_buttons = []
-        released_buttons = []
-        for i, button in enumerate(buttons):
-            gamepad_button_num = gamepad_buttons[i]
 
-            if button.value:
-                released_buttons.append(gamepad_button_num)
-            else:
-                #print("button",i,"=",button.value, "was pressed")
-                pressed_buttons.append(gamepad_button_num)
-
-        #print(set(released_buttons).intersection(pressed_buttons))
-        gp.press_buttons(pressed_buttons)
-        gp.release_buttons(released_buttons)
-       
-    
-    elif mode == 2: # Keyboard Mode      
+        
+        if joystickmode == "digital":
+            setx = 0
+            sety = 0
+            #Not keyboard presses for directional
+            #So check them seperately first
+            if not buttons[12].value: #if button is pressed aka connected to ground aka 0
+                sety = -127
+            if not buttons[13].value:
+                sety = 127
+            if not buttons[14].value:
+                setx = -127
+            if not buttons[15].value:
+                setx = 127
+            #Set Joystick movements
+            gp.move_joysticks(
+                x=setx,
+                y=sety,
+            )
+            
+            # Go through all the button definitions, and
+            # press or release as appropriate
+            for i, button in enumerate(buttons):
+                if i < 12: #Skip the last 4, since they're the directionals
+                    gamepad_button_num = gamepad_buttons[i] # Minus 4 to ignore directionals
+                    if button.value:
+                        gp.release_buttons(gamepad_button_num)
+                    else:
+                        print("button",i,"=",button.value, "was pressed")#grab gpio value from list of buttons
+                        gp.press_buttons(gamepad_button_num)
+        
+        else:
+            gp.move_joysticks(
+            x =range_map(ax.value, 0, 65535, -127, 127),
+            y =range_map(ay.value, 0, 65535, 127, -127),
+            )
+            
+            for i, button in enumerate(buttons):
+                gamepad_button_num = gamepad_buttons[i]
+                if button.value:
+                    
+                    gp.release_buttons(gamepad_button_num)
+                else:
+                    print("button",i,"=",button.value, "was pressed")
+                    gp.press_buttons(gamepad_button_num)
+        
+    if mode == 2: # Keyboard Mode
+            
         for i, button in enumerate(buttons):
             #print("button",i,"=",button.value) #optional print to show which game buttons are pushed.
             if button.value:
@@ -385,7 +362,7 @@ while True:
             else:
                 keyboard.press(keyboard_buttons[i]) 
     #FPS Mode
-    elif mode == 3:
+    if mode == 3:
         for i, button in enumerate(buttons):
             gamepad_button_num = gamepad_buttons[i]
             if button.value:
@@ -393,7 +370,7 @@ while True:
             else:
                 keyboard.press(fps_buttons[i])
     #Mouse mode            
-    elif mode == 4:
+    if mode == 4:
         if not buttons[15].value:
             mouse.move(x=4)
         if not buttons[12].value:
@@ -409,7 +386,7 @@ while True:
             mouse.click(Mouse.RIGHT_BUTTON)
             debounce()
 
-    elif mode == 5: #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
+    if mode == 5: #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
         if not buttons[0].value:
             mediacontrol.send(ConsumerControlCode.VOLUME_DECREMENT)
             debounce()

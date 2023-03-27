@@ -231,7 +231,7 @@ for pin in pins1:
     
 
 
-gamepad_buttons_inorder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+gamepad_buttons_inorder = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 for pin in range(0,len(buttons)-15):
     gamepad_buttons_inorder.append((pin%15) + 1)
 
@@ -288,7 +288,7 @@ text_area = label.Label(
 splash.append(text_area)
 """
 def debounce():
-    sleep(5)
+    sleep(0.2)
 
 #defaults
 mode = 1
@@ -350,34 +350,62 @@ while True:
                 gamepad_buttons = list(gamepad_buttons_rogueLegacy)
                 print("here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
         
-    #if (count >= 1000):
-    #    count = 0
+    if (count >= 1000):
+        count = 0
         #print("heartbeat")
-    #count = count +1
+    count = count +1
     
     
     if mode == 1: #when in gamepad mode...
-        gp.move_joysticks(
-        x =range_map(ax.value, 0, 65535, -127, 127),
-        y =range_map(ay.value, 0, 65535, 127, -127),
-        )
-        pressed_buttons = []
-        released_buttons = []
-        for i, button in enumerate(buttons):
-            gamepad_button_num = gamepad_buttons[i]
 
-            if button.value:
-                released_buttons.append(gamepad_button_num)
-            else:
-                #print("button",i,"=",button.value, "was pressed")
-                pressed_buttons.append(gamepad_button_num)
-
-        #print(set(released_buttons).intersection(pressed_buttons))
-        gp.press_buttons(pressed_buttons)
-        gp.release_buttons(released_buttons)
-       
-    
-    elif mode == 2: # Keyboard Mode      
+        
+        if joystickmode == "digital":
+            setx = 0
+            sety = 0
+            #Not keyboard presses for directional
+            #So check them seperately first
+            if not buttons[12].value: #if button is pressed aka connected to ground aka 0
+                sety = -127
+            if not buttons[13].value:
+                sety = 127
+            if not buttons[14].value:
+                setx = -127
+            if not buttons[15].value:
+                setx = 127
+            #Set Joystick movements
+            gp.move_joysticks(
+                x=setx,
+                y=sety,
+            )
+            
+            # Go through all the button definitions, and
+            # press or release as appropriate
+            for i, button in enumerate(buttons):
+                if i < 12: #Skip the last 4, since they're the directionals
+                    gamepad_button_num = gamepad_buttons[i] # Minus 4 to ignore directionals
+                    if button.value:
+                        gp.release_buttons(gamepad_button_num)
+                    else:
+                        print("button",i,"=",button.value, "was pressed")#grab gpio value from list of buttons
+                        gp.press_buttons(gamepad_button_num)
+        
+        else:
+            gp.move_joysticks(
+            x =range_map(ax.value, 0, 65535, -127, 127),
+            y =range_map(ay.value, 0, 65535, 127, -127),
+            )
+            
+            for i, button in enumerate(buttons):
+                gamepad_button_num = gamepad_buttons[i]
+                if button.value:
+                    
+                    gp.release_buttons(gamepad_button_num)
+                else:
+                    print("button",i,"=",button.value, "was pressed")
+                    gp.press_buttons(gamepad_button_num)
+        
+    if mode == 2: # Keyboard Mode
+            
         for i, button in enumerate(buttons):
             #print("button",i,"=",button.value) #optional print to show which game buttons are pushed.
             if button.value:
@@ -385,7 +413,7 @@ while True:
             else:
                 keyboard.press(keyboard_buttons[i]) 
     #FPS Mode
-    elif mode == 3:
+    if mode == 3:
         for i, button in enumerate(buttons):
             gamepad_button_num = gamepad_buttons[i]
             if button.value:
@@ -393,7 +421,7 @@ while True:
             else:
                 keyboard.press(fps_buttons[i])
     #Mouse mode            
-    elif mode == 4:
+    if mode == 4:
         if not buttons[15].value:
             mouse.move(x=4)
         if not buttons[12].value:
@@ -409,7 +437,7 @@ while True:
             mouse.click(Mouse.RIGHT_BUTTON)
             debounce()
 
-    elif mode == 5: #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
+    if mode == 5: #replaced 5 bc i dont want it to be 5 rn. dont have enough buttos assigned for 5
         if not buttons[0].value:
             mediacontrol.send(ConsumerControlCode.VOLUME_DECREMENT)
             debounce()
