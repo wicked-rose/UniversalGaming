@@ -58,7 +58,7 @@ board.D12,              #D10 = 14,               LFT  RGT
 board.D11               #D11 = 15
 )
 
-def update_oled(mode,joystickmode):
+def update_oled(mode,joystickmode,thirdarg):
     splash = displayio.Group()
     display.show(splash)
 
@@ -78,6 +78,13 @@ def update_oled(mode,joystickmode):
     text = joystickmode
     text_area = label.Label(
         terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=43
+    )
+    splash.append(text_area)
+    text = ""
+    if (thirdarg != ""):
+        text = thirdarg
+    text_area = label.Label(
+        terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=53
     )
     splash.append(text_area)
 
@@ -251,8 +258,9 @@ layout_num = 1
 joystickmode = "analog"
 oldJoystickMode = "analog"
 gamepad_buttons = list(gamepad_buttons_inorder)
+recentremap = "no recent remaps"
 
-update_oled(mode,joystickmode)
+update_oled(mode,joystickmode,"")
 
 print("Hello! Universal Gaming Controller Now Active.")
 print("Joystick Mode: ",joystickmode, ". Button Layout: Default.")
@@ -268,7 +276,7 @@ while True:
             if mode >= 1 and mode <= 5:
                 mode = serialRead
                 if mode != oldmode or joystickmode != oldJoystickMode:
-                    update_oled(mode,joystickmode)
+                    update_oled(mode,joystickmode,recentremap)
             else:
                 mode = mode
         elif type(serialRead) == type("string") and serialRead != "": #if serial stuff is not a number:.
@@ -284,13 +292,19 @@ while True:
                 debounce()
                 print("joystick mode is now:", joystickmode)
                 oldJoystickMode = joystickmode
-                update_oled(mode,joystickmode)
+                update_oled(mode,joystickmode,recentremap)
             elif serialRead.split()[0] == "remap":
                 x,y = parse_remap_string(serialRead)
                 if (x == -1  or y == -1):
                     print("please enter value integer values from 0 and to 15")
                 else:
                     gamepad_buttons[x] = y+1
+                    try:
+                        recentremap = str(x) + "->" + str(y)
+                        
+                    except:
+                        recentremap = "error"
+                update_oled(mode,joystickmode,recentremap)
                 print("gamepad button"[x], "is now ",y,"here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
             elif serialRead.split()[0] == "default":
                 gamepad_buttons = list(gamepad_buttons_inorder)
@@ -333,10 +347,10 @@ while True:
                 if i < 12: #Skip the last 4, since they're the directionals
                     gamepad_button_num = gamepad_buttons[i] # Minus 4 to ignore directionals
                     if button.value:
-                        gp.release_buttons()
-                    else:gamepad_button_num
+                        gp.release_buttons_ptr(gamepad_button_num)
+                    else:
                         print("button",i,"=",button.value, "was pressed")#grab gpio value from list of buttons
-                        gp.press_buttons(gamepad_button_num)
+                        gp.press_buttons_ptr(gamepad_button_num)
         
         else:
             gp.move_joysticks(
@@ -348,10 +362,10 @@ while True:
                 gamepad_button_num = gamepad_buttons[i]
                 if button.value:
                     
-                    gp.release_buttons(gamepad_button_num)
+                    gp.release_buttons_ptr(gamepad_button_num)
                 else:
                     print("button",i,"=",button.value, "was pressed")
-                    gp.press_buttons(gamepad_button_num)
+                    gp.press_buttons_ptr(gamepad_button_num)
         
     if mode == 2: # Keyboard Mode
             
