@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-a0ffe12e3c2566e698e5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "UniversalGamingApp",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "UniversalGamingApp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-UniversalGamingApp-Debug-07f20432fd261eb05d5a.json",
+					"name" : "UniversalGamingApp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "UniversalGamingApp_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-UniversalGamingApp_autogen-Debug-49311f6d9ea74e868c8a.json",
+					"name" : "UniversalGamingApp_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "UniversalGamingApp_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-UniversalGamingApp_autogen_timestamp_deps-Debug-0289a1a8b8c9f7a095f0.json",
+					"name" : "UniversalGamingApp_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/emmab/UniversalGaming/UniversalGaming/UniversalGamingApp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
