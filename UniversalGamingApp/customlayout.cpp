@@ -5,6 +5,7 @@ CustomLayout::CustomLayout(QWidget *parent) :
     QWidget(parent),
     m_ui(new Ui::CustomLayout),
     m_serial(new QSerialPort),
+    thisBox0(new MyComboBox(this,0)),
     thisBox1(new MyComboBox(this,1)),
     thisBox2(new MyComboBox(this,2)),
     thisBox3(new MyComboBox(this,3)),
@@ -20,7 +21,23 @@ CustomLayout::CustomLayout(QWidget *parent) :
     thisBox13(new MyComboBox(this,13)),
     thisBox14(new MyComboBox(this,14)),
     thisBox15(new MyComboBox(this,15)),
-    thisBox16(new MyComboBox(this,16))
+    label0(new QLabel),
+    label1(new QLabel),
+    label2(new QLabel),
+    label3(new QLabel),
+    label4(new QLabel),
+    label5(new QLabel),
+    label6(new QLabel),
+    label7(new QLabel),
+    label8(new QLabel),
+    label9(new QLabel),
+    label10(new QLabel),
+    label11(new QLabel),
+    label12(new QLabel),
+    label13(new QLabel),
+    label14(new QLabel),
+    label15(new QLabel)
+   // groupBox0(new QGroupBox(tr("Button 0"),this))
 {
     m_ui->setupUi(this);
     select();
@@ -34,23 +51,71 @@ CustomLayout::~CustomLayout()
 }
 
 void CustomLayout::addOptions(){
-    m_ui->leftLayout->addWidget(thisBox1);
-    m_ui->leftLayout->addWidget(thisBox2);
-    m_ui->leftLayout->addWidget(thisBox3);
-    m_ui->leftLayout->addWidget(thisBox4);
-    m_ui->leftLayout->addWidget(thisBox5);
-    m_ui->leftLayout->addWidget(thisBox6);
-    m_ui->leftLayout->addWidget(thisBox7);
-    m_ui->leftLayout->addWidget(thisBox8);
+    label0->setText("Button0");
+    m_ui->leftLayout->addWidget(label0);
+    //m_ui->leftLayout->addWidget(groupBox0);
+    m_ui->leftLayout->addWidget(thisBox0);
 
+    label1->setText("Button1");
+    m_ui->leftLayout->addWidget(label1);
+    m_ui->leftLayout->addWidget(thisBox1);
+
+    label2->setText("Button2");
+    m_ui->leftLayout->addWidget(label2);
+    m_ui->leftLayout->addWidget(thisBox2);
+
+    label3->setText("Button3");
+    m_ui->leftLayout->addWidget(label3);
+    m_ui->leftLayout->addWidget(thisBox3);
+
+    label4->setText("Button4");
+    m_ui->leftLayout->addWidget(label4);
+    m_ui->leftLayout->addWidget(thisBox4);
+
+    label5->setText("Button5");
+    m_ui->leftLayout->addWidget(label5);
+    m_ui->leftLayout->addWidget(thisBox5);
+
+    label6->setText("Button6");
+    m_ui->leftLayout->addWidget(label6);
+    m_ui->leftLayout->addWidget(thisBox6);
+
+    label7->setText("Button7");
+    m_ui->leftLayout->addWidget(label7);
+    m_ui->leftLayout->addWidget(thisBox7);
+
+
+    label8->setText("Button8");
+    m_ui->rightLayout->addWidget(label8);
+    m_ui->rightLayout->addWidget(thisBox8);
+
+    label9->setText("Button9");
+    m_ui->rightLayout->addWidget(label9);
     m_ui->rightLayout->addWidget(thisBox9);
+
+    label10->setText("Button10");
+    m_ui->rightLayout->addWidget(label10);
     m_ui->rightLayout->addWidget(thisBox10);
+
+    label11->setText("Button11");
+    m_ui->rightLayout->addWidget(label11);
     m_ui->rightLayout->addWidget(thisBox11);
+
+    label12->setText("Button12");
+    m_ui->rightLayout->addWidget(label12);
     m_ui->rightLayout->addWidget(thisBox12);
+
+    label13->setText("Button13");
+    m_ui->rightLayout->addWidget(label13);
     m_ui->rightLayout->addWidget(thisBox13);
+
+    label14->setText("Button14");
+    m_ui->rightLayout->addWidget(label14);
     m_ui->rightLayout->addWidget(thisBox14);
+
+    label15->setText("Button15");
+    m_ui->rightLayout->addWidget(label15);
     m_ui->rightLayout->addWidget(thisBox15);
-    m_ui->rightLayout->addWidget(thisBox16);
 }
 
 

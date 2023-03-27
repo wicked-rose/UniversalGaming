@@ -165,6 +165,7 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QApplication \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QComboBox \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QCommonStyle \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/QGroupBox \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QMessageBox \
@@ -185,6 +186,7 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qcommonstyle.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qdialog.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qgroupbox.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qmessagebox.h \

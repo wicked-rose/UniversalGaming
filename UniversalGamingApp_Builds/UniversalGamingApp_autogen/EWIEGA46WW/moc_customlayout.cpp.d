@@ -92,6 +92,7 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtCore/qtextstream.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qtypeinfo.h \
+  C:/Qt/6.4.2/mingw_64/include/QtCore/qurl.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -113,12 +114,14 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qpaintdevice.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qpalette.h \
+  C:/Qt/6.4.2/mingw_64/include/QtGui/qpicture.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qpixelformat.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qpixmap.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qpolygon.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qregion.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qrgb.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qrgba64.h \
+  C:/Qt/6.4.2/mingw_64/include/QtGui/qtextdocument.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qtgui-config.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qtguiexports.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qtguiglobal.h \
@@ -139,6 +142,8 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtTextToSpeech/qvoice.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QApplication \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QComboBox \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/QGroupBox \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QWidget \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -148,6 +153,8 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qapplication.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qcombobox.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qgroupbox.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qrubberband.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qsizepolicy.h \

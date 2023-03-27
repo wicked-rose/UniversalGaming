@@ -8,6 +8,8 @@
 #include <QComboBox>
 #include <QVector>
 #include <QList>
+#include <QLabel>
+#include <QGroupBox>
 
 #include <iostream>
 #include <string>
@@ -41,7 +43,7 @@ public:
                       "Button 10","Button 11","Button 12","Button 13","Button 14","Button 15"});
 
             thisIndex = index;
-            setCurrentIndex(thisIndex-1);
+            setCurrentIndex(thisIndex);
 
             connect(this, &QComboBox::activated, this, &MyComboBox::onComboBoxActivated);
             QString toSay = "Button " + QString::number(index);
@@ -77,7 +79,7 @@ public:
             if (this_serial.open(QIODevice::ReadWrite)  ) {
                 qDebug() << "serial connected";
                 // send data
-                string data = "remap " + to_string(thisIndex) + " " + to_string(newIndex+1) + "\x0D";
+                string data = "remap " + to_string(thisIndex) + " " + to_string(newIndex) + "\x0D";
                 const char *c_str = data.c_str();
                 const QByteArray writeData(c_str);
                 qDebug() << c_str;
@@ -102,6 +104,7 @@ private:
     QString portName = "COM3";
     QSerialPort *m_serial = nullptr;
     //QList<QComboBox*> boxes;
+    MyComboBox *thisBox0 = nullptr;
     MyComboBox *thisBox1 = nullptr;
     MyComboBox *thisBox2 = nullptr;
     MyComboBox *thisBox3 = nullptr;
@@ -117,7 +120,25 @@ private:
     MyComboBox *thisBox13 = nullptr;
     MyComboBox *thisBox14 = nullptr;
     MyComboBox *thisBox15 = nullptr;
-    MyComboBox *thisBox16 = nullptr;
+
+    QLabel *label0 = nullptr;
+    QLabel *label1 = nullptr;
+    QLabel *label2 = nullptr;
+    QLabel *label3 = nullptr;
+    QLabel *label4 = nullptr;
+    QLabel *label5 = nullptr;
+    QLabel *label6 = nullptr;
+    QLabel *label7 = nullptr;
+    QLabel *label8 = nullptr;
+    QLabel *label9 = nullptr;
+    QLabel *label10 = nullptr;
+    QLabel *label11 = nullptr;
+    QLabel *label12 = nullptr;
+    QLabel *label13 = nullptr;
+    QLabel *label14 = nullptr;
+    QLabel *label15 = nullptr;
+
+   // QGroupBox *groupBox0 = nullptr;
 
 };
 
