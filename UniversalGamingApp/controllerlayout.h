@@ -6,6 +6,9 @@
 #include <QLabel>
 #include <QStatusBar>
 #include <QMessageBox>
+#include <QString>
+#include <string>
+using namespace std;
 
 namespace Ui {
 class ControllerLayout;
@@ -23,14 +26,13 @@ public:
     void select();
     void openSerialPort(QString name);
     void closeSerialPort();
-    void showStatusMessage(const QString &message);
+signals:
+    void sendStatus(QString message);
 
 private:
     Ui::ControllerLayout *ui;     
     int currLayout;
     QSerialPort *m_serial = nullptr;
-    QStatusBar *statusBar = nullptr;
-    QLabel *m_status = nullptr;
 };
 
 #endif // CONTROLLERLAYOUT_H
