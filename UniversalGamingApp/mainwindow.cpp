@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
 
     m_ui->statusBar->show();
-    displayStatusMessage("Ready...");
+    //displayStatusMessage("Ready...");
 };
 
 MainWindow::~MainWindow()

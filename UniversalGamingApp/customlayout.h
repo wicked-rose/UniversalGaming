@@ -33,21 +33,21 @@ public:
     {
     public:
         int thisIndex = 0;
-       // QSerialPort *this_serial = nullptr;
-        //auto myParent = qobject_cast<parentWidget()
 
         MyComboBox(QWidget *parent = nullptr, int index = 0): QComboBox(parent){
             addItems({"Button 1","Button 2","Button 3","Button 4","Button 5",
                       "Button 6","Button 7","Button 8","Button 9","Button 10",
                       "Button 11","Button 12","Button 13","Button 14","Button 15","Button 16"});
-            setCurrentIndex(thisIndex);
+
             thisIndex = index;
+            setCurrentIndex(thisIndex-1);
+
             connect(this, &QComboBox::activated, this, &MyComboBox::onComboBoxActivated);
         }
 
         void onComboBoxActivated(int newIndex){
-            qDebug() << "activated";
            // updateLayout(thisIndex, newIndex);
+
             // detect serial port
             const auto infos = QSerialPortInfo::availablePorts();
             QString portName = "COM5";
@@ -74,35 +74,14 @@ public:
             if (this_serial.open(QIODevice::ReadWrite)  ) {
                 qDebug() << "serial connected";
                 // send data
-                string data = "off\x0D"; //"remap " + to_string(thisIndex) + " " + to_string(newIndex);
+                string data = "remap " + to_string(thisIndex) + " " + to_string(newIndex+1) + "\x0D";
                 const char *c_str = data.c_str();
-                const QByteArray writeData(c_str);// = data.toUtf8();
+                const QByteArray writeData(c_str);
+                qDebug() << c_str;
 
-
-//                const QByteArray write1("o");
-//                this_serial.write(write1);
-//                const QByteArray write2("n");
-//                this_serial.write(write2);
-//                const QByteArray write3("\r");
-//                this_serial.write(write3);
-
-  //              qDebug() << write1 << write2 << write3;
-
-                //writeData.QByteArray::fromHex(c_str);
-                if (this_serial.isOpen()) {
-                    qDebug() << "serial still connected";
-                }
                 this_serial.clear();
-                qint64 bytesWritten = this_serial.write(writeData);
-                qDebug() << bytesWritten << " bytes written to serial port";
-
-                QObject::connect(&this_serial, &QSerialPort::bytesWritten, [](qint64 bytes){
-                    qDebug() << bytes << " bytes written to serial port 2";
-                });
-
-                if(this_serial.waitForBytesWritten()){
-                    qDebug() << "bytes have been written";
-                }
+                this_serial.write(writeData);
+                this_serial.waitForBytesWritten();
             }
 
             // close serial port

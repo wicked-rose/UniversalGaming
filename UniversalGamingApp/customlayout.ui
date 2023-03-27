@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -21,37 +21,23 @@
        <property name="spacing">
         <number>6</number>
        </property>
-       <item>
-        <widget class="QWidget" name="widget" native="true"/>
-       </item>
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="rightLayout"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="selectButton">
+      <widget class="QLabel" name="diagram">
        <property name="text">
-        <string>Select</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../../../OneDrive/Documents/Senior Design/numberedController.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
        </property>
       </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="rightLayout"/>
      </item>
     </layout>
    </item>

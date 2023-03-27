@@ -57,9 +57,14 @@ void ControllerLayout::select()
     qDebug() << portName;
     openSerialPort(portName);
 
-    QByteArray writeData("2");
-   // writeData.setNum(currLayout);
+    // send data
+    string data = "off\x0D"; //"to_string(currLayout) + "\x0D";
+    const char *c_str = data.c_str();
+    const QByteArray writeData(c_str);
+
+    m_serial->clear();
     m_serial->write(writeData);
+    m_serial->waitForBytesWritten();
 
     qDebug() << "sent "+writeData+" over serial";
     closeSerialPort();
@@ -75,7 +80,6 @@ void ControllerLayout::openSerialPort(QString name)
     m_serial->setParity(QSerialPort::NoParity);
     m_serial->setStopBits(QSerialPort::OneStop);
     m_serial->setFlowControl( QSerialPort::NoFlowControl);
-    //m_serial->open(QIODevice::ReadWrite);
 
     if (m_serial->open(QIODevice::ReadWrite)) {
         qDebug() << "serial connected";
