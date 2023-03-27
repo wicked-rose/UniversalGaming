@@ -74,35 +74,35 @@ public:
             if (this_serial.open(QIODevice::ReadWrite)  ) {
                 qDebug() << "serial connected";
                 // send data
-                string data = "on"; //"remap " + to_string(thisIndex) + " " + to_string(newIndex);
+                string data = "off\x0D"; //"remap " + to_string(thisIndex) + " " + to_string(newIndex);
                 const char *c_str = data.c_str();
                 const QByteArray writeData(c_str);// = data.toUtf8();
 
 
-                const QByteArray write1("o");
-                this_serial.write(write1);
-                const QByteArray write2("n");
-                this_serial.write(write2);
-                const QByteArray write3("\r");
-                this_serial.write(write3);
+//                const QByteArray write1("o");
+//                this_serial.write(write1);
+//                const QByteArray write2("n");
+//                this_serial.write(write2);
+//                const QByteArray write3("\r");
+//                this_serial.write(write3);
 
-                qDebug() << write1 << write2 << write3;
+  //              qDebug() << write1 << write2 << write3;
 
                 //writeData.QByteArray::fromHex(c_str);
                 if (this_serial.isOpen()) {
                     qDebug() << "serial still connected";
                 }
                 this_serial.clear();
-//                qint64 bytesWritten = this_serial.write(writeData);
-//                qDebug() << bytesWritten << " bytes written to serial port";
+                qint64 bytesWritten = this_serial.write(writeData);
+                qDebug() << bytesWritten << " bytes written to serial port";
 
-//                QObject::connect(&this_serial, &QSerialPort::bytesWritten, [](qint64 bytes){
-//                    qDebug() << bytes << " bytes written to serial port 2";
-//                });
+                QObject::connect(&this_serial, &QSerialPort::bytesWritten, [](qint64 bytes){
+                    qDebug() << bytes << " bytes written to serial port 2";
+                });
 
-//                if(this_serial.waitForBytesWritten()){
-//                    qDebug() << "bytes have been written";
-//                }
+                if(this_serial.waitForBytesWritten()){
+                    qDebug() << "bytes have been written";
+                }
             }
 
             // close serial port
