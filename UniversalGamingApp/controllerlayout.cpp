@@ -2,7 +2,7 @@
 #include "ui_controllerlayout.h"
 #include <QSerialPort>
 #include <QSerialPortInfo>
-
+#include <tts.h>
 ControllerLayout::ControllerLayout(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ControllerLayout),
@@ -15,6 +15,8 @@ ControllerLayout::ControllerLayout(QWidget *parent) :
     connect(ui->selectButton, &QPushButton::clicked,
             this, &ControllerLayout::select);
 
+    tts* layoutBox = new tts(ui->selectLayoutBox, nullptr, "Layout Choice");
+    tts* selectButton = new tts(ui->selectButton);
     fillLayoutOptions();
 }
 

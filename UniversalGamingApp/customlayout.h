@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <tts.h>
 using namespace std;
 
 namespace Ui {
@@ -43,6 +44,8 @@ public:
             setCurrentIndex(thisIndex-1);
 
             connect(this, &QComboBox::activated, this, &MyComboBox::onComboBoxActivated);
+            QString toSay = "Button " + QString::number(index);
+            tts* cbTts = new tts(this, nullptr, toSay);
         }
 
         void onComboBoxActivated(int newIndex){

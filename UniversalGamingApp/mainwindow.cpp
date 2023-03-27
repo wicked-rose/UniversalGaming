@@ -10,6 +10,10 @@
 #include <QSerialPort>
 #include <iostream>
 
+
+tts *TTS_button;
+tts *CB_button ;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_ui(new Ui::MainWindow),
@@ -22,12 +26,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
     connect(m_ui->applyButton, &QPushButton::clicked,
             this, &MainWindow::apply);
-
     connect(m_layout, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
     //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
 
     m_ui->statusBar->show();
     //displayStatusMessage("Ready...");
+
+//    for (int i = 0; i < m_ui->menuTabWidget->tabBar()->count(); i++) {
+//        QWidget* button = m_ui->menuTabWidget->tabBar()->tabButton(i, QTabBar::LeftSide);
+//        tts* tab_buttons = new tts(button, nullptr, "Test");
+//    }
+
 };
 
 MainWindow::~MainWindow()
@@ -51,12 +60,14 @@ void MainWindow::on_pushButton_clicked()
         // Create the text-to-speech object
         QTextToSpeech *text_to_speech = new QTextToSpeech();
         text_to_speech->say("Text to Speech enabled");
-        tts *TTS_button = new tts(m_ui->pushButton);
-        tts *CB_button = new tts(m_ui->ColorBlindMode);
+        TTS_button = new tts(m_ui->pushButton);
+        CB_button = new tts(m_ui->ColorBlindMode);
     }
     else {
         QTextToSpeech *text_to_speech = new QTextToSpeech();
         text_to_speech->say("Text to Speech disabled");
+        delete TTS_button;
+        delete CB_button;
     }
 }
 
