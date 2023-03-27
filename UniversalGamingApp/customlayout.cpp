@@ -23,6 +23,7 @@ CustomLayout::CustomLayout(QWidget *parent) :
     thisBox16(new MyComboBox(this,16))
 {
     m_ui->setupUi(this);
+    select();
     addOptions();
    // updateLayout();
 }
@@ -33,33 +34,48 @@ CustomLayout::~CustomLayout()
 }
 
 void CustomLayout::addOptions(){
-    //QHBoxLayout *layout = new QHBoxLayout(this);
-    //thisBox1->thisBox.setParent(this);
     m_ui->leftLayout->addWidget(thisBox1);
+    m_ui->leftLayout->addWidget(thisBox2);
+    m_ui->leftLayout->addWidget(thisBox3);
+    m_ui->leftLayout->addWidget(thisBox4);
+    m_ui->leftLayout->addWidget(thisBox5);
+    m_ui->leftLayout->addWidget(thisBox6);
+    m_ui->leftLayout->addWidget(thisBox7);
+    m_ui->leftLayout->addWidget(thisBox8);
 
-   // m_ui->box1->addItems({"Button 1","Button 2","Button 3","Button 4","Button 5",
-   //                     "Button 6","Button 7","Button 8","Button 9","Button 10",
-   //                     "Button 11","Button 12","Button 13","Button 14","Button 15","Button 16"});
+    m_ui->rightLayout->addWidget(thisBox9);
+    m_ui->rightLayout->addWidget(thisBox10);
+    m_ui->rightLayout->addWidget(thisBox11);
+    m_ui->rightLayout->addWidget(thisBox12);
+    m_ui->rightLayout->addWidget(thisBox13);
+    m_ui->rightLayout->addWidget(thisBox14);
+    m_ui->rightLayout->addWidget(thisBox15);
+    m_ui->rightLayout->addWidget(thisBox16);
 }
+
 
 void CustomLayout::updateLayout(int thisIndex, int newIndex){
     // send serial instruction
-    // " remap " + this index + chosen index
     openSerialPort(portName);
 
-     QString data = "remap " + QString::number(thisIndex) + " " + QString::number(newIndex);
-    qDebug() << data;
-    QByteArray writeData = data.toLatin1();
-   // writeData.QByteArray::fromHex(data.toUTF8());
-    m_serial->write(writeData);
+    if (m_serial->open(QIODevice::ReadWrite)  ) {
+        qDebug() << "serial connected";
+        // send data
+        string data = "remap " + to_string(thisIndex) + " " + to_string(newIndex);
+        const char *c_str = data.c_str();
+        const QByteArray writeData(c_str);
+
+        m_serial->clear();
+        m_serial->write(writeData);
+        m_serial->waitForBytesWritten();
+    }
 
     closeSerialPort();
 }
 
 void CustomLayout::select(){
-    // change later to continuously send remap over serial on ComboBox click
     const auto infos = QSerialPortInfo::availablePorts();
-    portName = "COM3";
+    portName = "COM5";
     QString goalId = "463638";
 
     for (const QSerialPortInfo &info : infos) {
@@ -69,23 +85,16 @@ void CustomLayout::select(){
             portName = info.portName();
         }
     }
-    openSerialPort(portName);
-
-    //updateLayout();
-
-    closeSerialPort();
-
 }
 void CustomLayout::openSerialPort(QString name){
-    // read heartbeat signal, if matches pico ID, connect
-    // connect to serial port
     m_serial->setPortName(name);
     m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
     m_serial->setParity(QSerialPort::OddParity);
     m_serial->setStopBits(QSerialPort::OneStop);
     m_serial->setFlowControl( QSerialPort::NoFlowControl);
-    if (m_serial->open(QIODevice::ReadWrite)) {
+    m_serial->open(QIODevice::ReadWrite);
+    if (m_serial->isOpen()) {
         //showStatusMessage(tr("Connected"));
     } else {
         //QMessageBox::critical(this, tr("Error"), m_serial->errorString());

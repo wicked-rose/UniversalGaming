@@ -7,6 +7,8 @@
 #include <QStatusBar>
 #include <QMessageBox>
 #include <QString>
+#include <string>
+using namespace std;
 
 namespace Ui {
 class ControllerLayout;
