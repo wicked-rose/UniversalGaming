@@ -10,6 +10,7 @@
 #include <QList>
 #include <QLabel>
 #include <QGroupBox>
+#include <QSettings>
 
 #include <iostream>
 #include <string>
@@ -32,17 +33,19 @@ public:
     void select();
     void openSerialPort(QString name);
     void closeSerialPort();
+    void saveConfig();
     class MyComboBox : public QComboBox
     {
     public:
         int thisIndex = 0;
-
+        int newIndex = 0;
         MyComboBox(QWidget *parent = nullptr, int index = 0): QComboBox(parent){
             addItems({"Button 0","Button 1","Button 2","Button 3","Button 4",
                       "Button 5","Button 6","Button 7","Button 8","Button 9",
                       "Button 10","Button 11","Button 12","Button 13","Button 14","Button 15"});
 
             thisIndex = index;
+            newIndex = index;
             setCurrentIndex(thisIndex);
 
             connect(this, &QComboBox::activated, this, &MyComboBox::onComboBoxActivated);
@@ -52,7 +55,7 @@ public:
 
         void onComboBoxActivated(int newIndex){
            // updateLayout(thisIndex, newIndex);
-
+            this->newIndex = newIndex;
             // detect serial port
             const auto infos = QSerialPortInfo::availablePorts();
             QString portName = "COM5";
@@ -138,6 +141,8 @@ private:
     QLabel *label14 = nullptr;
     QLabel *label15 = nullptr;
 
+    QPushButton *button = nullptr;
+    QSettings *settings = nullptr;
    // QGroupBox *groupBox0 = nullptr;
 
 };
