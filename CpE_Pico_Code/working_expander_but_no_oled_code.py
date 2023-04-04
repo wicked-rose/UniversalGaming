@@ -369,10 +369,9 @@ while True:
             if button.value:
                 released_buttons.append(gamepad_button_num)
             else:
-                #print("button",i,"=",button.value, "was pressed")
+                print("button",i,"=",button.value, "was pressed")
                 pressed_buttons.append(gamepad_button_num)
 
-        #print(set(released_buttons).intersection(pressed_buttons))
         gp.press_buttons(pressed_buttons)
         gp.release_buttons(released_buttons)
        
