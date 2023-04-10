@@ -31,6 +31,7 @@ void ControllerLayout::fillLayoutOptions()
     ui->selectLayoutBox->addItem(QStringLiteral("2. Keyboard"), 2);
     ui->selectLayoutBox->addItem(QStringLiteral("3. FPS"), 3);
     ui->selectLayoutBox->addItem(QStringLiteral("4. Mouse"), 4);
+    ui->selectLayoutBox->addItem(QStringLiteral("5. Multimedia"), 5);
     emit sendStatus("Preset Layouts");
 }
 
