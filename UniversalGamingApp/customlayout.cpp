@@ -1,5 +1,6 @@
 #include "customlayout.h"
 #include "ui_customlayout.h"
+#include <QSettings>
 
 CustomLayout::CustomLayout(QWidget *parent) :
     QWidget(parent),
@@ -36,7 +37,9 @@ CustomLayout::CustomLayout(QWidget *parent) :
     label12(new QLabel),
     label13(new QLabel),
     label14(new QLabel),
-    label15(new QLabel)
+    label15(new QLabel),
+    button(new QPushButton),
+    settings(new QSettings("myconfig.ini", QSettings::IniFormat))
    // groupBox0(new QGroupBox(tr("Button 0"),this))
 {
     m_ui->setupUi(this);
@@ -116,6 +119,10 @@ void CustomLayout::addOptions(){
     label15->setText("Button15");
     m_ui->rightLayout->addWidget(label15);
     m_ui->rightLayout->addWidget(thisBox15);
+
+    button->setText("Save Layout");
+    connect(button, &QPushButton::clicked, this, &CustomLayout::saveConfig);
+    m_ui->rightLayout->addWidget(button);
 }
 
 
@@ -170,4 +177,23 @@ void CustomLayout::closeSerialPort(){
     if (m_serial->isOpen())
         m_serial->close();
     //showStatusMessage(tr("Disconnected"));
+}
+void CustomLayout::saveConfig(){
+    qDebug() << "layout saved";
+    settings->setValue("Button 0", thisBox0->newIndex);
+    settings->setValue("Button 1", thisBox1->newIndex);
+    settings->setValue("Button 2", thisBox2->newIndex);
+    settings->setValue("Button 3", thisBox3->newIndex);
+    settings->setValue("Button 4", thisBox4->newIndex);
+    settings->setValue("Button 5", thisBox5->newIndex);
+    settings->setValue("Button 6", thisBox6->newIndex);
+    settings->setValue("Button 7", thisBox7->newIndex);
+    settings->setValue("Button 8", thisBox8->newIndex);
+    settings->setValue("Button 9", thisBox9->newIndex);
+    settings->setValue("Button 10", thisBox10->newIndex);
+    settings->setValue("Button 11", thisBox11->newIndex);
+    settings->setValue("Button 12", thisBox12->newIndex);
+    settings->setValue("Button 13", thisBox13->newIndex);
+    settings->setValue("Button 14", thisBox14->newIndex);
+    settings->setValue("Button 15", thisBox15->newIndex);
 }
