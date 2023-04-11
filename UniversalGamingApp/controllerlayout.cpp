@@ -33,6 +33,7 @@ void ControllerLayout::fillLayoutOptions()
     ui->selectLayoutBox->addItem(QStringLiteral("3. FPS"), 3);
     ui->selectLayoutBox->addItem(QStringLiteral("4. Mouse"), 4);
     ui->selectLayoutBox->addItem(QStringLiteral("5. Multimedia"), 5);
+    ui->selectLayoutBox->addItem(QStringLiteral("6. Custom Layout"), 6);
     emit sendStatus("Preset Layouts");
 }
 
@@ -47,7 +48,7 @@ void ControllerLayout::setControllerLayout(int index)
 
 void ControllerLayout::select()
 {
-    if(currLayout == 5){
+    if(currLayout == 6){
         QSettings settings("myconfig.ini", QSettings::IniFormat);
         const auto infos = QSerialPortInfo::availablePorts();
         QString portName = "COM3";

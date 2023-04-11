@@ -4,5 +4,6 @@
 class Global {
 public:
     static bool isEnabled;
+    static int inc;
 };
 #endif // GLOBAL_H

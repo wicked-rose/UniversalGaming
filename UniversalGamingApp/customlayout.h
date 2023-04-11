@@ -75,6 +75,10 @@ public:
                 QString toSay = "Button " + QString::number(thisIndex) + "remapped to Button " + QString::number(newIndex);
                 this->cbTts->setToSay(toSay);
             }
+            else{
+                QString toSay = "Button " + QString::number(thisIndex) + "default function";
+                this->cbTts->setToSay(toSay);
+            }
             // open serial port
             QSerialPort this_serial;
             qDebug() << portName;
