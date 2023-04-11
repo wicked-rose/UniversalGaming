@@ -1,6 +1,7 @@
 #include "controllerlayout.h"
 #include "ui_controllerlayout.h"
 #include <QSerialPort>
+#include <QSettings>
 #include <QSerialPortInfo>
 #include <tts.h>
 ControllerLayout::ControllerLayout(QWidget *parent) :
@@ -46,6 +47,38 @@ void ControllerLayout::setControllerLayout(int index)
 
 void ControllerLayout::select()
 {
+    if(currLayout == 5){
+        QSettings settings("myconfig.ini", QSettings::IniFormat);
+        const auto infos = QSerialPortInfo::availablePorts();
+        QString portName = "COM3";
+        QString goalId = "463638";
+
+        for (const QSerialPortInfo &info : infos) {
+            const auto serialNum = info.serialNumber();
+            QString str = serialNum.left(6);
+            if(str == goalId){
+                portName = info.portName();
+            }
+        }
+        qDebug() << portName;
+        openSerialPort(portName);
+
+        // send data
+        for(int i = 0; i < 16; i++){
+            if(settings.contains("Button " + to_string(i))) {
+                QString remap = "remap " + QString::number(i) + " " + settings.value("Button " + to_string(i)).toString() + "\x0D";
+                const QByteArray writeData = remap.toUtf8();
+
+                m_serial->clear();
+                m_serial->write(writeData);
+                m_serial->waitForBytesWritten();
+
+                qDebug() << "sent "+writeData+" over serial";
+            }
+        }
+        closeSerialPort();
+        return;
+    }
     const auto infos = QSerialPortInfo::availablePorts();
     QString portName = "COM3";
     QString goalId = "463638";

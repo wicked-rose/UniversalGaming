@@ -40,6 +40,7 @@ public:
     public:
         int thisIndex = 0;
         int newIndex = 0;
+        tts* cbTts;
         MyComboBox(QWidget *parent = nullptr, int index = 0): QComboBox(parent){
             addItems({"Button 0","Button 1","Button 2","Button 3","Button 4",
                       "Button 5","Button 6","Button 7","Button 8","Button 9",
@@ -51,7 +52,7 @@ public:
 
             connect(this, &QComboBox::activated, this, &MyComboBox::onComboBoxActivated);
             QString toSay = "Button " + QString::number(index);
-            tts* cbTts = new tts(this, nullptr, toSay);
+            cbTts = new tts(this, nullptr, toSay);
         }
 
 
@@ -70,7 +71,10 @@ public:
                     portName = info.portName();
                 }
             }
-
+            if(thisIndex != newIndex){
+                QString toSay = "Button " + QString::number(thisIndex) + "remapped to Button " + QString::number(newIndex);
+                this->cbTts->setToSay(toSay);
+            }
             // open serial port
             QSerialPort this_serial;
             qDebug() << portName;
@@ -81,6 +85,7 @@ public:
             this_serial.setStopBits(QSerialPort::OneStop);
             this_serial.setFlowControl( QSerialPort::NoFlowControl);
            // this_serial.open(QIODevice::ReadWrite);
+
             if (this_serial.open(QIODevice::ReadWrite)  ) {
                 qDebug() << "serial connected";
                 // send data

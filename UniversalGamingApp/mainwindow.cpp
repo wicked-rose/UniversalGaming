@@ -84,10 +84,12 @@ void MainWindow::on_pushButton_clicked()
         text_to_speech->say("Text to Speech enabled");
         TTS_button = new tts(m_ui->pushButton);
         CB_button = new tts(m_ui->ColorBlindMode);
+        m_ui->pushButton->setText("Text to Speech (ON)");
     }
     else {
         QTextToSpeech *text_to_speech = new QTextToSpeech();
         text_to_speech->say("Text to Speech disabled");
+        m_ui->pushButton->setText("Text to Speech (OFF)");
         delete TTS_button;
         delete CB_button;
     }

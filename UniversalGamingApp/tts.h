@@ -74,6 +74,10 @@ public:
         m_tts = new QTextToSpeech();
     }
 
+    void setToSay(QString toSay){
+        this->toSay = toSay;
+    }
+
 //    explicit tts(QTabBar *tab, QObject *parent = nullptr)
 //        : QObject(parent)
 //        , m_tab(tab)
