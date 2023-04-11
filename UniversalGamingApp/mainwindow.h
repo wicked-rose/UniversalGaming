@@ -35,6 +35,8 @@ private slots:
     void on_pushButton_clicked();
     void onShowFullScreen();
     void onShowNormal();
+    void on_menuTabWidget_tabBarClicked(int index);
+
 public slots:
     void displayStatusMessage(QString message);
 

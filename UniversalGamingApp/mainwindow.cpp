@@ -115,3 +115,29 @@ void MainWindow::onShowNormal()
     qDebug() << "Main window is no longer in full screen";
 }
 
+
+void MainWindow::on_menuTabWidget_tabBarClicked(int index)
+{
+    if(Global::isEnabled){
+        switch(index){
+        case 0:
+            text_to_speech->say("Home");
+            break;
+        case 1:
+            text_to_speech->say("Preset Layouts");
+            break;
+        case 2:
+            text_to_speech->say("Custom Layouts");
+            break;
+        case 3:
+            text_to_speech->say("On-Screen Options");
+            break;
+        case 4:
+            text_to_speech->say("Test Controller");
+            break;
+        }
+
+    }
+
+}
+
