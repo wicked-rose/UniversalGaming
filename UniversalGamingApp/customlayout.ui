@@ -6,14 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1052</width>
-    <height>884</height>
+    <width>908</width>
+    <height>852</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0">
+   <item>
+    <layout class="QHBoxLayout" name="topText">
+     <item>
+      <widget class="QLabel" name="instructions">
+       <property name="text">
+        <string>Instructions</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>

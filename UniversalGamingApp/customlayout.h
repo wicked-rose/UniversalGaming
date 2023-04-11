@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QGroupBox>
 #include <QSettings>
+#include <QLayout>
 
 #include <iostream>
 #include <string>
@@ -52,6 +53,7 @@ public:
             QString toSay = "Button " + QString::number(index);
             tts* cbTts = new tts(this, nullptr, toSay);
         }
+
 
         void onComboBoxActivated(int newIndex){
            // updateLayout(thisIndex, newIndex);
@@ -97,6 +99,21 @@ public:
                 this_serial.close();
         }
     };
+    //QGroupBox* myGroupBox(int index, MyComboBox *myBox);
+    class MyGroupBox : public QGroupBox{
+    public:
+        MyComboBox *myBox;
+        MyGroupBox(QWidget *parent = nullptr, int index = 0, MyComboBox *thisBox = nullptr): QGroupBox(parent){
+            myBox = thisBox;
+            setTitle("Button " + QString::number(index));
+            this->setStyleSheet("QGroupBox::title {color: red}");
+
+            QVBoxLayout *layout = new QVBoxLayout;
+            layout->addWidget(myBox);
+            layout->addStretch(1);
+            this->setLayout(layout);
+        }
+    };
 
 signals:
     void sendStatus(QString message);
@@ -106,44 +123,11 @@ private:
     QString currLayout;
     QString portName = "COM3";
     QSerialPort *m_serial = nullptr;
-    //QList<QComboBox*> boxes;
-    MyComboBox *thisBox0 = nullptr;
-    MyComboBox *thisBox1 = nullptr;
-    MyComboBox *thisBox2 = nullptr;
-    MyComboBox *thisBox3 = nullptr;
-    MyComboBox *thisBox4 = nullptr;
-    MyComboBox *thisBox5 = nullptr;
-    MyComboBox *thisBox6 = nullptr;
-    MyComboBox *thisBox7 = nullptr;
-    MyComboBox *thisBox8 = nullptr;
-    MyComboBox *thisBox9 = nullptr;
-    MyComboBox *thisBox10 = nullptr;
-    MyComboBox *thisBox11 = nullptr;
-    MyComboBox *thisBox12 = nullptr;
-    MyComboBox *thisBox13 = nullptr;
-    MyComboBox *thisBox14 = nullptr;
-    MyComboBox *thisBox15 = nullptr;
-
-    QLabel *label0 = nullptr;
-    QLabel *label1 = nullptr;
-    QLabel *label2 = nullptr;
-    QLabel *label3 = nullptr;
-    QLabel *label4 = nullptr;
-    QLabel *label5 = nullptr;
-    QLabel *label6 = nullptr;
-    QLabel *label7 = nullptr;
-    QLabel *label8 = nullptr;
-    QLabel *label9 = nullptr;
-    QLabel *label10 = nullptr;
-    QLabel *label11 = nullptr;
-    QLabel *label12 = nullptr;
-    QLabel *label13 = nullptr;
-    QLabel *label14 = nullptr;
-    QLabel *label15 = nullptr;
 
     QPushButton *button = nullptr;
     QSettings *settings = nullptr;
-   // QGroupBox *groupBox0 = nullptr;
+
+    QList<MyGroupBox*> boxes;
 
 };
 

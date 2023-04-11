@@ -28,7 +28,29 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::apply);
     connect(m_layout, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
     //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
+    connect(this, &MainWindow::showFullScreen, this, &MainWindow::onShowFullScreen);
+    connect(this, &MainWindow::showNormal, this, &MainWindow::onShowNormal);
 
+//    connect(this, &QMainWindow::changeEvent, this, [this](QEvent* event){
+//        if(event->type() == QEvent::WindowStateChange){
+//            QWindowStateChangeEvent *stateEvent = static_cast<QWindowStateChangeEvent*>(event);
+//            if(stateEvent->oldState() != stateEvent->newState() && stateEvent->newState() & Qt::WindowFullScreen){
+//                qDebug() << "Fullscreen";
+//                //                QFont font = QApplication::font();
+//                //                font.setPointSize(font.pointSize() * 2);
+//                //                QApplication::setFont(font);
+//            }
+
+//            else {
+//                // The window is not in fullscreen mode
+//                // Set the font size back to its default
+//               // QApplication::setFont(QApplication::font());
+//                qDebug() << "No Fullsrceen";
+//            }
+//    });
+        if(this->windowState() & Qt::WindowFullScreen){
+            qDebug() << "Fullscreen";
+        }
     m_ui->statusBar->show();
     //displayStatusMessage("Ready...");
 
@@ -73,5 +95,15 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::displayStatusMessage(QString message){
     m_ui->statusBar->showMessage(message);
+}
+
+void MainWindow::onShowFullScreen()
+{
+    qDebug() << "Main window is now in full screen";
+}
+
+void MainWindow::onShowNormal()
+{
+    qDebug() << "Main window is no longer in full screen";
 }
 

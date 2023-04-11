@@ -26,9 +26,15 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void showFullScreen();
+    void showNormal();
+
 private slots:
     void apply();
     void on_pushButton_clicked();
+    void onShowFullScreen();
+    void onShowNormal();
 public slots:
     void displayStatusMessage(QString message);
 
@@ -38,5 +44,9 @@ private:
     Console *m_console = nullptr;
     ControllerLayout *m_layout = nullptr;
     CustomLayout *m_custom = nullptr;
+
+
+//    connect(this, &QWidget::showFullScreen, this, &MainWindow::onShowFullScreen);
+//    connect(this, &QWidget::showNormal, this, &MainWindow::onShowNormal);
 };
 #endif // MAINWINDOW_H
