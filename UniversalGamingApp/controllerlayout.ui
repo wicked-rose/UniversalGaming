@@ -18,7 +18,8 @@
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>Arial Rounded MT Bold</family>
+       <pointsize>24</pointsize>
       </font>
      </property>
      <property name="text">
@@ -38,6 +39,13 @@
        </property>
        <item row="0" column="1">
         <widget class="QGroupBox" name="groupBox_4">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Keyboard</string>
          </property>
@@ -60,6 +68,13 @@
        </item>
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox_3">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Gamepad</string>
          </property>
@@ -82,6 +97,13 @@
        </item>
        <item row="0" column="2">
         <widget class="QGroupBox" name="groupBox">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>FPS</string>
          </property>
@@ -110,6 +132,13 @@
        </item>
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_2">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Mouse</string>
          </property>
@@ -132,6 +161,13 @@
        </item>
        <item row="1" column="1">
         <widget class="QGroupBox" name="groupBox_5">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Multimedia</string>
          </property>
@@ -139,6 +175,13 @@
        </item>
        <item row="1" column="2">
         <widget class="QGroupBox" name="groupBox_6">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Custom Preset</string>
          </property>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>908</width>
-    <height>852</height>
+    <height>876</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,17 @@
     <layout class="QHBoxLayout" name="topText">
      <item>
       <widget class="QLabel" name="instructions">
+       <property name="font">
+        <font>
+         <family>Arial Rounded MT Bold</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Instructions</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Instructions&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Each box title represents a physical input on the controller, with a dropdown of all other inputs whose function can be mapped to your chosen input. Button inputs will be remapped to the controlelr instantly when selected from the dropdown boxes. Once all inputs have had the desired functionality selected, you can select&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:700;&quot;&gt; Save Layout&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; to save your current configuration to a local file, which can be loaded later by selecting option six (6) in the &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:700;&quot;&gt;Preset Layouts&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; tab.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -36,14 +45,26 @@
      </item>
      <item>
       <widget class="QLabel" name="diagram">
+       <property name="baseSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/numberedController.png</pixmap>
+        <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/SM_NumberedControllerNEW.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>

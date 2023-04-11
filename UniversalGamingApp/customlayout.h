@@ -114,8 +114,34 @@ public:
         MyComboBox *myBox;
         MyGroupBox(QWidget *parent = nullptr, int index = 0, MyComboBox *thisBox = nullptr): QGroupBox(parent){
             myBox = thisBox;
-            setTitle("Button " + QString::number(index));
-            this->setStyleSheet("QGroupBox::title {color: red}");
+            if(index == 6){
+                setTitle("Button 6 (Left Tigger)");
+            }
+            else if(index == 4){
+                setTitle("Button 4 (Left Bumper)");
+            }
+            else if(index == 10){
+                setTitle("Button 10 (Left Joystick)");
+            }
+            else if(index == 7){
+                setTitle("Button 7 (Right Trigger)");
+            }
+            else if(index == 5){
+                setTitle("Button 5 (Right Bumper)");
+            }
+            else if(index == 11){
+                setTitle("Button 11 (Right Joystick)");
+            }
+            else{
+                setTitle("Button " + QString::number(index));
+            }
+
+            QFont font("Arial Rounded MT Bold", 12);
+            this->setFont(font);
+
+            QPalette palette = this->palette();
+            palette.setColor(QPalette::WindowText, Qt::red);
+            this->setPalette(palette);
 
             QVBoxLayout *layout = new QVBoxLayout;
             layout->addWidget(myBox);
