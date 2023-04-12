@@ -5,6 +5,9 @@
 #include <QSerialPort>
 #include <QStackedWidget>
 #include <QPushButton>
+#include <QProcess>
+#include <QFileDialog>
+
 #include "customtabstyle.h"
 #include "terminalwindow.h"
 #include "settingswidget.h"
@@ -36,9 +39,12 @@ private slots:
     void onShowFullScreen();
     void onShowNormal();
     void on_menuTabWidget_tabBarClicked(int index);
+    void initColorblindScript(int mode, QString img);
 
 public slots:
     void displayStatusMessage(QString message);
+    void openColorblindMode();
+    void chooseFile();
 
 private:
     Ui::MainWindow *m_ui;
@@ -46,7 +52,9 @@ private:
     Console *m_console = nullptr;
     ControllerLayout *m_layout = nullptr;
     CustomLayout *m_custom = nullptr;
-
+    QProcess process;
+    QString myImage = "";
+    int myMode = 0;
 
 //    connect(this, &QWidget::showFullScreen, this, &MainWindow::onShowFullScreen);
 //    connect(this, &QWidget::showNormal, this, &MainWindow::onShowNormal);

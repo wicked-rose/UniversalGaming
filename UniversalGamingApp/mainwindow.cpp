@@ -22,12 +22,18 @@ MainWindow::MainWindow(QWidget *parent)
       m_console(new Console),
       m_settings(new SettingsWidget),
       m_layout(new ControllerLayout),
-      m_custom(new CustomLayout)
+      m_custom(new CustomLayout),
+      process(new QProcess)
+      //myImage(new QString),
+     // myMode(new int)
 {
     m_ui->setupUi(this);
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
-    connect(m_ui->applyButton, &QPushButton::clicked,
-            this, &MainWindow::apply);
+
+    connect(m_ui->applyButton, &QPushButton::clicked, this, &MainWindow::apply);
+    connect(m_ui->ColorBlindMode, &QPushButton::clicked, this, &MainWindow::openColorblindMode);
+    connect(m_ui->chooseFile, &QPushButton::clicked, this, &MainWindow::chooseFile);
+
     connect(m_layout, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
     //connect(m_custom, SIGNAL(sendStatus(QString)), this, SLOT(displayStatusMessage(QString)));
     connect(this, &MainWindow::showFullScreen, this, &MainWindow::onShowFullScreen);
@@ -139,5 +145,42 @@ void MainWindow::on_menuTabWidget_tabBarClicked(int index)
 
     }
 
+}
+// get input from dropdown / textbox
+void MainWindow::initColorblindScript(int mode, QString img){
+    QString program = "python";
+    QStringList arguments;
+
+    QString m = QString::number(mode);
+    arguments << "Resources/Colorblind/filter.py" << m << img;
+    // debug
+    qDebug() << "arguments: " << arguments;
+    process.setProgram(program);
+    process.setArguments(arguments);
+}
+
+void MainWindow::openColorblindMode(){
+    QComboBox* box = m_ui->modeBox;
+    myMode = box->currentIndex() + 1;
+
+    // debug
+    QString img = "Resources/Colorblind/ark.jpg";
+
+    initColorblindScript(myMode, myImage);
+    process.start();
+    process.waitForFinished(-1);
+
+//    QString output = process.readAllStandardOutput();
+//    QString error = process.readAllStandardError();
+//    qDebug() << "Output: " << output;
+//    qDebug() << "Error: " << error;
+}
+
+void MainWindow::chooseFile(){
+    qDebug() << "here";
+    QString fileName = QFileDialog::getOpenFileName(nullptr,"Select a file","/","All files (*.*)");
+    m_ui->myFile->setText("Selected File: " + fileName);
+    myImage = fileName;
+    qDebug() << "Selected file: " << fileName;
 }
 
