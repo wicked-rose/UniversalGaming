@@ -39,7 +39,8 @@ keyboard = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(keyboard)
 gp = Gamepad(usb_hid.devices)
 verbose = 1
-
+#List of defind mode names
+mode_names = {1 : 'Gamepad', 2 : 'Keyboard', 3 : 'FPS', 4 : "Mouse", 5 : "Multimedia"}
 #Create a collection of GPIO pins that represent the buttons.
 #This includes the digital pins for the Directional Pad
 #They can be used as regular buttons if using the analog inputs instead
@@ -61,28 +62,52 @@ board.D12,              #D10 = 14,               LFT  RGT
 board.D13               #D11 = 15
 )
 
-def update_oled(mode,joystickmode):
-    splash = displayio.Group()
-    display.show(splash)
+def update_oled(mode, size = "big",remap = "error"):
+    if (size == "big"):
 
-    # Draw a label
+        splash = displayio.Group()
+        display.show(splash)
 
-    text = "Mode : " + str(mode)
-    text_area = label.Label(
-    terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=3
-    )
-    splash.append(text_area)
-    text = mode_names[int(mode)]
-    text_area = label.Label(
-        terminalio.FONT, text=text, color=0xFFFF0F, x=3, y=23
-    )
+        # Draw a label
+
+        text = "Mode " +str(mode)+ ": " +  mode_names[mode]
+        text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=5)
+        splash.append(text_area)
+
+        if (remap != "error"):
+            text = remap
+            text_area = label.Label(
+            terminalio.FONT, text=text, color=0xFFFF0F, x=3, y=18
+            )
+            splash.append(text_area)
+
+    else:
     
-    splash.append(text_area)
-    text = joystickmode
-    text_area = label.Label(
-        terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=43
-    )
-    splash.append(text_area)
+        splash = displayio.Group()
+        display.show(splash)
+
+        # Draw a label
+
+        text = "Mode : " + str(mode)
+        text_area = label.Label(
+        terminalio.FONT, text=text, color=0xFFFFFF, x=3, y=3
+        )
+        splash.append(text_area)
+
+
+        text = mode_names[int(mode)]
+        text_area = label.Label(
+        terminalio.FONT, text=text, color=0xFFFF0F, x=15, y=3
+        )
+        splash.append(text_area)
+
+        if (remap != "error"):
+            text = remap
+            text_area = label.Label(
+            terminalio.FONT, text=text, color=0xFFFF0F, x=3, y=23
+            )
+            splash.append(text_area)
+
 
 def parse_remap_string(input_string):
     
@@ -96,17 +121,14 @@ def parse_remap_string(input_string):
         except:
             y = y
 
-
-
-
         if (type(y) == type(1)):
             try:
             #if its an int, parse int stuff
                 x = int(x)
                 y = int(y)
-                if 0 <= x <= 15:
+                if 0 <= x <= 22:
                     x = x
-                elif 0 <= y <= 15:
+                elif 0 <= y <= 22:
                     y = y
             except ValueError:
                 x= -1
@@ -118,14 +140,14 @@ def parse_remap_string(input_string):
             except ValueError:
                 x = -1
             
-            if 0 <= x <= 15:
+            if 0 <= x <= 22:
                     x = int(x)
                     x = x+ 0
             else:
                     x = -1
 
             print("Y IS:\"",y,"\"")
-            if y in gamepad_buttons_map: #if the string is in the dict, return the num associated.
+            if y <= len(buttons): #if the string is in the dict, return the num associated.
                     y = gamepad_buttons_map[y]
             
         return x,y
@@ -148,7 +170,8 @@ def range_map(x, in_min, in_max, out_min, out_max):
 # Map the buttons to button numbers on the Gamepad
 # gamepad_buttons[i] will send that button number when buttons[i]
 # x's mean i dont have 
-# is pushed.                        #x  x 
+
+myset                       = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
 gamepad_buttons_rogueLegacy =       (2, 3, 1,4, 7, 8, 5,6, 9, 10, 11, 12, 13, 14, 15,16)
 
 gamepad_buttons0 =                  (2, 4, 3, 1, 6, 7, 13, 16, 13, 15, 8, 9, 10, 9, 8,2)
@@ -176,8 +199,6 @@ fps_buttons = {0 : Keycode.D, 1 : Keycode.S, 2 : Keycode.A, 3 : Keycode.W,
                8 : Keycode.ENTER, 9 : Keycode.ENTER, 10 : Keycode.ENTER, 11 : Keycode.ENTER, 12 : Keycode.ENTER
                , 13 : Keycode.ENTER, 14 : Keycode.ENTER, 15 : Keycode.ENTER}
 
-#List of defind mode names
-mode_names = {1 : 'Gamepad', 2 : 'Keyboard', 3 : 'FPS', 4 : "Mouse", 5 : "Multimedia"}
 
 #Set Default Mode To 1
 mode = 1
@@ -185,7 +206,7 @@ mode = 1
 WIDTH = 128
 HEIGHT = 64
 BORDER = 5
-
+teeny = 1
 
 
 i2c1 = busio.I2C(board.SCL, board.SDA) # DISPLAY OLEDS
@@ -258,8 +279,11 @@ ay = analogio.AnalogIn(board.A0)
 def range_map(x, in_min, in_max, out_min, out_max):
     return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
   
+if (teeny == 1):
+    display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=32)
 
-display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
+else:
+    display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=WIDTH, height=HEIGHT)
 
 #Make the display context.
 splash = displayio.Group()
@@ -292,8 +316,9 @@ layout_num = 1
 joystickmode = "analog"
 oldJoystickMode = "analog"
 gamepad_buttons = list(gamepad_buttons_inorder)
+recentremap = ""
 
-update_oled(mode,joystickmode)
+update_oled(mode = mode,remap = recentremap)
 
 print("Hello! Universal Gaming Controller Now Active.")
 print("Joystick Mode: ",joystickmode, ". Button Layout: Default.")
@@ -309,7 +334,7 @@ while True:
             if mode >= 1 and mode <= 5:
                 mode = serialRead
                 if mode != oldmode or joystickmode != oldJoystickMode:
-                    update_oled(mode,joystickmode)
+                    update_oled(mode = mode,remap = recentremap)
                     #print(mode,joystickmode)
             else:
                 mode = mode
@@ -326,15 +351,21 @@ while True:
                 debounce()
                 print("joystick mode is now:", joystickmode)
                 oldJoystickMode = joystickmode
-                update_oled(mode,joystickmode)
+                update_oled(mode,remap = recentremap)
                 #print(mode,joystickmode)
             elif serialRead.split()[0] == "remap":
                 x,y = parse_remap_string(serialRead)
                 if (x == -1  or y == -1):
                     print("please enter value integer values from 0 and to 15")
                 else:
-                    gamepad_buttons[x] = y+1
-                print("gamepad button"[x], "is now ",y,"here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
+                    gamepad_buttons[x] = y+1 #this is the remap
+                    try:
+                        recentremap = str(x) + "->" + str(y)
+                        
+                    except:
+                        recentremap = "error"
+                update_oled(mode,remap = recentremap)
+                #print("gamepad button"[x], "is now ",y,"here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
             elif serialRead.split()[0] == "default":
                 gamepad_buttons = list(gamepad_buttons_inorder)
                 print("here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
@@ -342,11 +373,6 @@ while True:
                 gamepad_buttons = list(gamepad_buttons_rogueLegacy)
                 print("here are the buttons:",[thingy-1 for thingy in gamepad_buttons])
         
-    #if (count >= 1000):
-    #    count = 0
-        #print("heartbeat")
-    #count = count +1
-    
     
     if mode == 1: #when in gamepad mode...
         gp.move_joysticks(
@@ -357,31 +383,31 @@ while True:
         released_buttons = []
         for i, button in enumerate(buttons):
             gamepad_button_num = gamepad_buttons[i]
-            if button.value:
-                released_buttons.append(gamepad_button_num)
-            else:
+            if not button.value:
                 print("button",i,"=",button.value, "was pressed")
                 pressed_buttons.append(gamepad_button_num)
-
         gp.press_buttons(pressed_buttons)
-        gp.release_buttons(released_buttons)
-       
-    
-    elif mode == 2: # Keyboard Mode      
+        gp.release_buttons(myset.difference(set(pressed_buttons)))
+
+
+    elif mode == 2: # Keyboard Mode
+        pass   
+        """
         for i, button in enumerate(buttons):
-            #print("button",i,"=",button.value) #optional print to show which game buttons are pushed.
             if button.value:
                 keyboard.release(keyboard_buttons[i])
             else:
                 keyboard.press(keyboard_buttons[i]) 
+        """
     #FPS Mode
     elif mode == 3:
         for i, button in enumerate(buttons):
             gamepad_button_num = gamepad_buttons[i]
+
             if button.value:
-                keyboard.release(fps_buttons[i])
+                keyboard.release(fps_buttons[gamepad_button_num])
             else:
-                keyboard.press(fps_buttons[i])
+                keyboard.press(fps_buttons[gamepad_button_num])
     #Mouse mode            
     elif mode == 4:
         if not buttons[15].value:
