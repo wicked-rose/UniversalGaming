@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
      // myMode(new int)
 {
     m_ui->setupUi(this);
+    this->setWindowTitle("Universal Gaming");
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
 
     connect(m_ui->applyButton, &QPushButton::clicked, this, &MainWindow::apply);
@@ -164,7 +165,7 @@ void MainWindow::openColorblindMode(){
     myMode = box->currentIndex() + 1;
 
     // debug
-    QString img = "Resources/Colorblind/ark.jpg";
+    //QString img = "Resources/Colorblind/ark.jpg";
 
     initColorblindScript(myMode, myImage);
     process.start();
@@ -177,10 +178,8 @@ void MainWindow::openColorblindMode(){
 }
 
 void MainWindow::chooseFile(){
-    qDebug() << "here";
     QString fileName = QFileDialog::getOpenFileName(nullptr,"Select a file","/","All files (*.*)");
     m_ui->myFile->setText("Selected File: " + fileName);
     myImage = fileName;
-    qDebug() << "Selected file: " << fileName;
 }
 
