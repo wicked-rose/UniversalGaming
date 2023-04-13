@@ -1,6 +1,7 @@
 C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/UniversalGamingApp_autogen/EWIEGA46WW/moc_customlayout.cpp: C:/Users/emmab/UniversalGaming/UniversalGaming/UniversalGamingApp/customlayout.h \
   C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/UniversalGamingApp_autogen/moc_predefs.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/QList \
+  C:/Qt/6.4.2/mingw_64/include/QtCore/QSettings \
   C:/Qt/6.4.2/mingw_64/include/QtCore/QSharedDataPointer \
   C:/Qt/6.4.2/mingw_64/include/QtCore/QString \
   C:/Qt/6.4.2/mingw_64/include/QtCore/QVector \
@@ -69,6 +70,7 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qscopeguard.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qset.h \
+  C:/Qt/6.4.2/mingw_64/include/QtCore/qsettings.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qshareddata.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qshareddata_impl.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qsharedpointer.h \
@@ -144,6 +146,7 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QComboBox \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QGroupBox \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QLabel \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/QLayout \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QWidget \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -151,10 +154,14 @@ C:/Users/emmab/UniversalGaming/UniversalGaming/build-UniversalGamingApp-Desktop_
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qabstractslider.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qapplication.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qcombobox.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qgroupbox.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qlabel.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qlayout.h \
+  C:/Qt/6.4.2/mingw_64/include/QtWidgets/qlayoutitem.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qrubberband.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/qsizepolicy.h \
