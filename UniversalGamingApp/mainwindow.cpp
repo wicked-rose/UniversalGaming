@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Universal Gaming");
     m_ui->menuTabWidget->tabBar()->setStyle(new CustomTabStyle);
 
-    connect(m_ui->applyButton, &QPushButton::clicked, this, &MainWindow::apply);
+    //connect(m_ui->applyButton, &QPushButton::clicked, this, &MainWindow::apply);
     connect(m_ui->ColorBlindMode, &QPushButton::clicked, this, &MainWindow::openColorblindMode);
     connect(m_ui->chooseFile, &QPushButton::clicked, this, &MainWindow::chooseFile);
 
@@ -75,14 +75,14 @@ MainWindow::~MainWindow()
     delete m_ui;
 }
 
-void MainWindow::apply()
-{
-    m_settings->updateSettings();
-    terminalWindow *win = new terminalWindow(this, m_settings);
-    if(win != nullptr){
-        win->show();
-    }
-}
+//void MainWindow::apply()
+//{
+//    m_settings->updateSettings();
+//    terminalWindow *win = new terminalWindow(this, m_settings);
+//    if(win != nullptr){
+//        win->show();
+//    }
+//}
 
 void MainWindow::on_pushButton_clicked()
 {

@@ -34,7 +34,7 @@ signals:
     void showNormal();
 
 private slots:
-    void apply();
+   // void apply();
     void on_pushButton_clicked();
     void onShowFullScreen();
     void onShowNormal();
