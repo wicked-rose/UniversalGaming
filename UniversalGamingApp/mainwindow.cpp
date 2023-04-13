@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
             qDebug() << "Fullscreen";
         }
     m_ui->statusBar->show();
-    //displayStatusMessage("Ready...");
+    displayStatusMessage("Ready...");
 
 //    for (int i = 0; i < m_ui->menuTabWidget->tabBar()->count(); i++) {
 //        QWidget* button = m_ui->menuTabWidget->tabBar()->tabButton(i, QTabBar::LeftSide);

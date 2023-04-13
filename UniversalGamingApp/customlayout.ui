@@ -61,7 +61,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/SM_NumberedControllerNEW.png</pixmap>
+        <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/SM_NumberedControllerNEW.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>false</bool>

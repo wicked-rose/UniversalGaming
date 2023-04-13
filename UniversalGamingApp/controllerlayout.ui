@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1027</width>
-    <height>664</height>
+    <width>1606</width>
+    <height>1198</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,15 +51,30 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QLabel" name="keyboardLayout">
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/KeyboardLayout-Transparent.png</pixmap>
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/KeyboardLayout.png</pixmap>
             </property>
             <property name="scaledContents">
-             <bool>false</bool>
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -81,14 +96,29 @@
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="QLabel" name="gamepadLayout">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/GamepadLayout.png</pixmap>
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/GamepadLayout.png</pixmap>
             </property>
             <property name="scaledContents">
-             <bool>false</bool>
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -111,19 +141,28 @@
           <item>
            <widget class="QLabel" name="fpsLayout">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
             </property>
             <property name="text">
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/FPSLayout.png</pixmap>
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/SM_FPSLayouts.png</pixmap>
             </property>
             <property name="scaledContents">
-             <bool>false</bool>
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -145,14 +184,32 @@
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QLabel" name="mouseLayout">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/MouseLayout.png</pixmap>
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/MouseLayouts.png</pixmap>
             </property>
             <property name="scaledContents">
-             <bool>false</bool>
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -171,6 +228,36 @@
          <property name="title">
           <string>Multimedia</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/MultiMediaLayouts.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item row="1" column="2">
@@ -185,6 +272,36 @@
          <property name="title">
           <string>Custom Preset</string>
          </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>300</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap>../build-UniversalGamingApp-Desktop_Qt_6_4_2_MinGW_64_bit-Debug/Resources/Layout Diagrams/SM_NumberedControllerNEW.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
